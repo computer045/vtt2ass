@@ -3,6 +3,7 @@ def main
         convertFile(file_path)
         file_name = File.basename(file_path).gsub('.vtt', '.ass')
         File.open('./output/' + file_name, 'w') do |line|
+            line.print "\ufeff"
             line.puts convertFile(file_path)
         end
     end
@@ -79,7 +80,7 @@ def loadVtt(vttStr)
         lineBuf.push(l)
     end
     if (record != nil) then
-        if (!lineBuf[lineBuf.length - 1].empty?) then
+        if (lineBuf[lineBuf.length - 1].empty?) then
             lineBuf.pop()
         end
         record['text'] = lineBuf.join('\n')
