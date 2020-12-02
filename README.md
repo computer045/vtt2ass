@@ -7,7 +7,7 @@ This is a simple script to convert VTT files to ASS subtitles.
 
 ## Usage
 
-Add your VTT files in the `input directory`.
+Add your VTT files in the `input` directory.
 
 Run this command:
 ```bash
