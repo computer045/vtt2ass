@@ -128,11 +128,10 @@ end
 
 def toSubsTime(str)
     n = []
-    x = str.split(/[:.]/).map { |x| x.to_f }
+    x = str.split(/[:.]/).map { |x| x.to_i }
     
     msLen = 2
     hLen = 1
-    
     x[3] = '0.' + (x[3].to_s).rjust(3, '0')
     sx = x[0]*60*60 + x[1]*60 + x[2] + x[3].to_f
     sx = ("%.2f" % sx).split('.')
