@@ -80,8 +80,10 @@ def loadVtt(vttStr)
         lineBuf.push(l)
     end
     if (record != nil) then
-        if (lineBuf[lineBuf.length - 1].empty?) then
-            lineBuf.pop()
+        if (lineBuf.length > 0) then
+            if (lineBuf[lineBuf.length - 1].empty?) then
+                lineBuf.pop()
+            end
         end
         record['text'] = lineBuf.join('\n')
         data.push(record)
@@ -132,6 +134,7 @@ def toSubsTime(str)
     
     msLen = 2
     hLen = 1
+    
     x[3] = '0.' + (x[3].to_s).rjust(3, '0')
     sx = x[0]*60*60 + x[1]*60 + x[2] + x[3].to_f
     sx = ("%.2f" % sx).split('.')
