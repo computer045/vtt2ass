@@ -1,107 +1,123 @@
-def main
+def main  
     Dir["./input/*.vtt"].each do |file_path|
-        convertFile(file_path)
         file_name = File.basename(file_path).gsub('.vtt', '.ass')
         File.open('./output/' + file_name, 'w') do |line|
             line.print "\ufeff"
             line.puts convertFile(file_path)
         end
     end
+#    puts convertStyle("Caption1", "position:9% line:20% align:left", 1920, 1080)
 end
 
-def get_file_as_string(file_path)
-    data = ''
-    f = File.readlines(file_path).each do |line|
-        data += line
+def readVTTFile(file_path)
+    list_parapraph = []
+    File.foreach(file_path, "\r\n\r\n") do |paragraph|
+        if not paragraph.rstrip.eql? "" then
+            list_parapraph.push(paragraph.rstrip)
+        end
     end
-    return data
+    list_parapraph.shift
+    return list_parapraph
 end
 
 def convertFile(file_path)
-    return convertToAss(get_file_as_string(file_path))
+    return convertToAss(readVTTFile(file_path))
 end
 
-def convertToAss(vttStr)
+def convertToAss(list_parapraph)
+    # Style: Main,Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,2,10,10,50,1
+    # Style: MainTop,Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,8,10,10,30,1
+
+    width = 1920
+    height = 1080
+
+    styles = []
+    rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
+    list_parapraph.each do |paragraph|
+        lines = paragraph.split("\r\n")
+        style = "Main"
+        ext_param = ""
+        count = 0
+        lines.each do |line|
+            m = line.match(rx)
+            if not m and count == 0 then
+                style = line
+            elsif m then
+                ext_param = m[3]
+                break
+            end
+        end
+        style_line = convertStyle(style, ext_param, width, height)
+        style_exists = false
+        styles.each do |s|
+            if s.eql? style_line then
+                style_exists = true
+                break
+            end
+        end
+        if (not style_exists) then
+            styles.push(style_line)
+        end
+    end
+
     ass = [
         '[Script Info]',
         'Title: DKB Team',
         'ScriptType: v4.00+',
         'Collisions: Normal',
         'PlayDepth: 0',
-        'PlayResX: 1920',
-        'PlayResY: 1080',
+        "PlayResX: #{width}",
+        "PlayResY: #{height}",
         'WrapStyle: 0',
         'ScaledBorderAndShadow: yes',
         '',
         '[V4+ Styles]',
         'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding',
-        'Style: Main,Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,2,10,10,50,1',
-        'Style: MainTop,Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,8,10,10,30,1',
-        '',
-        '[Events]',
-        'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text'
     ]
+
+    ass.append(styles)
+    ass.append(
+        [
+            '',
+            '[Events]',
+            'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text'
+        ]
+    )
     
-    vttData = loadVtt(vttStr)
-    vttData.each do |l|
-        l = convertToAssLine(l, 'Main')
-        ass = ass.append(l)
+    list_parapraph.each do |paragraph|
+        paragraph = convertToAssLine(paragraph)
+        ass = ass.append(paragraph)
     end
     
     return ass
 end
 
-def loadVtt(vttStr)
+def convertToAssLine(paragraph)
+    lines = paragraph.split("\r\n")
     rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
-    lines = vttStr.gsub(/\r?\n/, '\n').split('\n')
-    data = []
-    lineBuf = []
-    record = nil
+    style = "Main"
+    line_text, time_start, time_end, ext_param = ""
+    count = 0
 
-    # check  lines
-    lines.each do |l|
-        m = l.match(rx)
-        if (m) then
-            if (lineBuf.length > 0) then
-                lineBuf.pop()
+    lines.each do |line|
+        m = line.match(rx)
+        if not m and count == 0 then
+            style = line
+        elsif m then
+            time_start = m[1]
+            time_end = m[2]
+            ext_param = m[3]
+            if ext_param.include? "line:7%" then
+                style = "MainTop"
             end
-            if record != nil then
-                record['text'] = lineBuf.join('\n')
-                data.push(record)
-            end
-            record = {
-                'time_start' => m[1],
-                'time_end' => m[2],
-                'ext_param' => m[3].split(' ').map{ |x| x.split(':')}
-            }
-            lineBuf = []
-            next
+        else
+            line_text += convertToAssText(line)
         end
-        lineBuf.push(l)
+        count += 1;
     end
-    if (record != nil) then
-        if (lineBuf.length > 0) then
-            if (lineBuf[lineBuf.length - 1].empty?) then
-                lineBuf.pop()
-            end
-        end
-        record['text'] = lineBuf.join('\n')
-        data.push(record)
-    end
-    return data
-end
 
-def convertToAssLine(l, style)
-    time_start = convertTime(l['time_start'])
-    time_end = convertTime(l['time_end'])
-    line_text = convertToAssText(l['text'])
+#    puts convertStyle(style, ext_param)
 
-    l['ext_param'].each do |param|
-        if param.include?('line') && param.include?('7%') then
-            style = 'MainTop'
-        end
-    end
-    
     return  "Dialogue: 0,#{time_start},#{time_end},#{style},,0,0,0,,#{line_text}"
 end
 
@@ -116,11 +132,49 @@ def convertToAssText(text)
         .gsub(/<b[^>]*>([^<]*)<\/b>/) { |s| "{\\b1}#{$1}{\\b0}" }
         .gsub(/<i[^>]*>([^<]*)<\/i>/) { |s| "{\\i1}#{$1}{\\i0}" }
         .gsub(/<u[^>]*>([^<]*)<\/u>/) { |s| "{\\u1}#{$1}{\\u0}" }
+        .gsub(/<c[^>]*>([^<]*)<\/c>/) { |s| $1 }
         .gsub(/<[^>]>/, '')
         .gsub(/\\N$/, '')
         .gsub(/ +$/, '')
 
     return text
+end
+
+def convertStyle(style, ext_param, width, height)
+    # Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+    alignment = "2"
+    left_margin = "10"
+    right_margin = "10"
+    vertical_margin = "50"
+
+    params = ext_param.split(' ').map { |p| p.split(':') }
+    param_count = 0
+    params.each do |p|
+        case p[0]
+        when "position"
+            left_margin = (width * ((p[1].gsub(/%/, '').to_f - 7) / 100)).to_i.to_s
+        when "align"
+            case p[1]
+            when "left"
+                alignment = 1
+            when "middle"
+                alignment = 2
+            when "right"
+                alignment = 3
+            end
+        when "line"
+            if p[1].eql? "7%" then
+                style = "MainTop"
+                vertical_margin = "30"
+                alignment = "8"
+            else
+                vertical_margin = (height - (height * ((p[1].gsub(/%/, '').to_f + 7) / 100))).to_i.to_s
+            end
+        end
+        param_count += 1
+    end
+
+    return "Style: #{style},Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,#{alignment},#{left_margin},#{right_margin},#{vertical_margin},1"
 end
 
 def convertTime(time)
