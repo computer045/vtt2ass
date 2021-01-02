@@ -11,9 +11,20 @@ end
 
 def readVTTFile(file_path)
     list_parapraph = []
+    count = 0
     File.foreach(file_path, "\r\n\r\n") do |paragraph|
-        if not paragraph.rstrip.eql? "" then
-            list_parapraph.push(paragraph.rstrip)
+        paragraph = paragraph.rstrip.gsub(/\r\n/, "\n")
+        if not paragraph.eql? "" then
+            list_parapraph.push(paragraph)
+        end
+        count += 1;
+    end
+    if count == 0 then
+        File.foreach(file_path, "\n\n") do |paragraph|
+            paragraph = paragraph.rstrip.gsub(/\r\n/, "\n")
+            if not paragraph.eql? "" then
+                list_parapraph.push(paragraph)
+            end
         end
     end
     list_parapraph.shift
@@ -34,7 +45,7 @@ def convertToAss(list_parapraph)
     styles = []
     rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
     list_parapraph.each do |paragraph|
-        lines = paragraph.split("\r\n")
+        lines = paragraph.split("\n")
         style = "Main"
         ext_param = ""
         count = 0
@@ -93,7 +104,7 @@ def convertToAss(list_parapraph)
 end
 
 def convertToAssLine(paragraph)
-    lines = paragraph.split("\r\n")
+    lines = paragraph.split("\n")
     rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
     style = "Main"
     line_text, time_start, time_end, ext_param = ""
@@ -107,7 +118,7 @@ def convertToAssLine(paragraph)
             time_start = m[1]
             time_end = m[2]
             ext_param = m[3]
-            if ext_param.include? "line:7%" then
+            if ext_param.include? "align:middle line:7%" then
                 style = "MainTop"
             end
         else
@@ -147,31 +158,31 @@ def convertStyle(style, ext_param, width, height)
     right_margin = "10"
     vertical_margin = "50"
 
-    params = ext_param.split(' ').map { |p| p.split(':') }
-    param_count = 0
-    params.each do |p|
-        case p[0]
-        when "position"
-            left_margin = (width * ((p[1].gsub(/%/, '').to_f - 7) / 100)).to_i.to_s
-        when "align"
-            case p[1]
-            when "left"
-                alignment = 1
-            when "middle"
-                alignment = 2
-            when "right"
-                alignment = 3
-            end
-        when "line"
-            if p[1].eql? "7%" then
-                style = "MainTop"
-                vertical_margin = "30"
-                alignment = "8"
-            else
+    if ext_param.include? "align:middle line:7%" then
+        style = "MainTop"
+        vertical_margin = "30"
+        alignment = "8"
+    else
+        params = ext_param.split(' ').map { |p| p.split(':') }
+        param_count = 0
+        params.each do |p|
+            case p[0]
+            when "position"
+                left_margin = (width * ((p[1].gsub(/%/, '').to_f - 7) / 100)).to_i.to_s
+            when "align"
+                case p[1]
+                when "left"
+                    alignment = 1
+                when "middle"
+                    alignment = 2
+                when "right"
+                    alignment = 3
+                end
+            when "line"
                 vertical_margin = (height - (height * ((p[1].gsub(/%/, '').to_f + 7) / 100))).to_i.to_s
             end
+            param_count += 1
         end
-        param_count += 1
     end
 
     return "Style: #{style},Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,#{alignment},#{left_margin},#{right_margin},#{vertical_margin},1"
