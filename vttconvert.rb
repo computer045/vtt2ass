@@ -1,3 +1,5 @@
+require 'os'
+
 def main  
     Dir["./input/*.vtt"].each do |file_path|
         file_name = File.basename(file_path).gsub('.vtt', '.ass')
@@ -6,25 +8,15 @@ def main
             line.puts convertFile(file_path)
         end
     end
-#    puts convertStyle("Caption1", "position:9% line:20% align:left", 1920, 1080)
 end
 
 def readVTTFile(file_path)
     list_parapraph = []
-    count = 0
-    File.foreach(file_path, "\r\n\r\n") do |paragraph|
+    separator = OS.linux? ? "\r\n\r\n": "\n\n"
+    File.foreach(file_path, separator) do |paragraph|
         paragraph = paragraph.rstrip.gsub(/\r\n/, "\n")
         if not paragraph.eql? "" then
             list_parapraph.push(paragraph)
-        end
-        count += 1;
-    end
-    if count == 0 then
-        File.foreach(file_path, "\n\n") do |paragraph|
-            paragraph = paragraph.rstrip.gsub(/\r\n/, "\n")
-            if not paragraph.eql? "" then
-                list_parapraph.push(paragraph)
-            end
         end
     end
     list_parapraph.shift
@@ -126,8 +118,6 @@ def convertToAssLine(paragraph)
         end
         count += 1;
     end
-
-#    puts convertStyle(style, ext_param)
 
     return  "Dialogue: 0,#{time_start},#{time_end},#{style},,0,0,0,,#{line_text}"
 end
