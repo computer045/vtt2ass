@@ -107,8 +107,8 @@ def convertToAssLine(paragraph)
         if not m and count == 0 then
             style = line
         elsif m then
-            time_start = m[1]
-            time_end = m[2]
+            time_start = convertTime(m[1])
+            time_end = convertTime(m[2])
             ext_param = m[3]
             if ext_param.include? "align:middle line:7%" then
                 style = "MainTop"
@@ -200,7 +200,7 @@ def toSubsTime(str)
     n.unshift(padTimeNum(':', (sx % 60).to_i, 2))
     n.unshift(padTimeNum(':', (sx / 60).floor % 60, 2))
     n.unshift(padTimeNum('',  (sx / 3600).floor % 60, hLen))
-    
+
     return n.join('')
 end
 
