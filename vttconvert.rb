@@ -114,10 +114,12 @@ def convertToAssLine(paragraph)
                 style = "MainTop"
             end
         else
-            line_text += convertToAssText(line)
+            line_text += convertToAssText("#{line}\n")
         end
         count += 1;
     end
+
+    line_text = line_text.gsub(/\\N$/, '')
 
     return  "Dialogue: 0,#{time_start},#{time_end},#{style},,0,0,0,,#{line_text}"
 end
@@ -135,7 +137,6 @@ def convertToAssText(text)
         .gsub(/<u[^>]*>([^<]*)<\/u>/) { |s| "{\\u1}#{$1}{\\u0}" }
         .gsub(/<c[^>]*>([^<]*)<\/c>/) { |s| $1 }
         .gsub(/<[^>]>/, '')
-        .gsub(/\\N$/, '')
         .gsub(/ +$/, '')
 
     return text
