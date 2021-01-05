@@ -22,5 +22,5 @@ Add your VTT files in the `input` directory.
 
 Run this command:
 ```bash
-$ ruby main.rb
+$ ruby vta.rb
 ```

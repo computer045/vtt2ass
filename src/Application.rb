@@ -1,18 +1,23 @@
 require 'os'
+require 'fileutils'
 require_relative 'VTTSubtitle'
 require_relative 'ASSSubtitle'
 require_relative 'ASSStyle'
 require_relative 'ASSFile'
 
 class Application
-    def initialize
+
+    def initialize(options)
+        @input_dir = options[:input] ? options[:input]: "./input"
+        @output_dir = options[:output] ? options[:output]: "./output"
         @width = 1920
         @height = 1080
     end
     def start
-        Dir["./input/*.vtt"].each do |file_path|
+        Dir["#{@input_dir}/*.vtt"].each do |file_path|
             file_name = File.basename(file_path).gsub('.vtt', '.ass')
-            File.open('./output/' + file_name, 'w') do |line|
+            FileUtils.mkdir_p @output_dir
+            File.open("#{@output_dir}/" + file_name, 'w') do |line|
                 line.print "\ufeff"
                 line.puts convertFileToASS(file_path)
             end
