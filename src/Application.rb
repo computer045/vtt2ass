@@ -1,18 +1,31 @@
+# Imports
 require 'os'
 require 'fileutils'
+
+# Relative imports
 require_relative 'VTTSubtitle'
 require_relative 'ASSSubtitle'
 require_relative 'ASSStyle'
 require_relative 'ASSFile'
 
+##
+# Main application class that manages all the operations.
 class Application
 
+    ##
+    # Creates a new Application instance.
+    # It receives +options+ that can define the input and output directories.
     def initialize(options)
         @input_dir = options[:input] ? options[:input]: "./input"
         @output_dir = options[:output] ? options[:output]: "./output"
         @width = 1920
         @height = 1080
     end
+
+    ##
+    # This method starts the application process.
+    # It sends the file_paths of VTT files in the input directory to convertFileToASS method
+    # and outputs the resulting ASS format to a new file.
     def start
         Dir["#{@input_dir}/*.vtt"].each do |file_path|
             file_name = File.basename(file_path).gsub('.vtt', '.ass')
@@ -24,6 +37,10 @@ class Application
         end
     end
 
+    ##
+    # This method reads the VTT file and sends back a list of paragraphs.
+    # It requires a +file_path+ as input.
+    # It outputs a list named list_paragraph.
     def readVTTFile(file_path)
         list_parapraph = []
         separator = OS.linux? ? "\r\n\r\n": "\n\n"
@@ -37,6 +54,11 @@ class Application
         return list_parapraph
     end
 
+    ##
+    # This method gets the list of paragraphs from the VTT file and creates lists of ASSSubtitle and ASSStyles objects from them.
+    # Those lists are given a new ASSFile object to generate the file content.
+    # It requires a +file_path+ as input.
+    # It outputs an ASSFile object.
     def convertFileToASS(file_path)
         vtt_subs = readVTTFile(file_path)
         ass_subs = []

@@ -1,6 +1,13 @@
+# Imports
 require 'optparse'
+
+# Relative imports
 require_relative 'src/Application'
 
+##
+# This function creates a new application instance and starts the process.
+#
+# It also defines the arguments that can be provided from the CLI.
 def main
     options = {}
 
@@ -20,4 +27,5 @@ def main
     app.start
 end
 
+# Runs the 'main' function
 main

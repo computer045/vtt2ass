@@ -1,4 +1,14 @@
+##
+# This class defines the ASS File that will be created from the conversion.
 class ASSFile
+
+    ##
+    # This method creates an instance of the ASSFile.
+    #
+    # * Requires +ass_styles+, a list of ASSStyle as input.
+    # * Requires +ass_subs+, a list of ASSSubtitles as input.
+    # * Requires a video +width+ as input.
+    # * Requires a video +height+ as input.
     def initialize(ass_styles, ass_subs, width, height)
         @width = width
         @height = height
@@ -24,6 +34,9 @@ class ASSFile
         ]
         @ass_subs = ass_subs
     end
+
+    ##
+    # This method concatenates the object data in the right order for a string output.
     def to_s
         return @header + @ass_styles + @events + @ass_subs
     end
