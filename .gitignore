@@ -1,2 +1,12 @@
+# Lock file
 Gemfile.lock
+
+# gems
+/*.gem
+
+# Temporary files for yard documentation
 .yardoc/
+
+# Input and output folders
+input/
+output/

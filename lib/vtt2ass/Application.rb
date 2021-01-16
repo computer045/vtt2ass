@@ -20,6 +20,7 @@ class Application
         @output_dir = options[:output] ? options[:output]: "./output"
         @width = 1920
         @height = 1080
+        @font_size = options[:font_size] ? options[:font_size] : 72
     end
 
     ##
@@ -73,7 +74,7 @@ class Application
                 end
             end
             if not style_exists then
-                ass_styles.push(ASSStyle.new(sub.style, sub.params, @width, @height))
+                ass_styles.push(ASSStyle.new(sub.style, sub.params, @font_size, @width, @height))
             end
         end
         return ASSFile.new(ass_styles, ass_subs, @width, @height).to_s

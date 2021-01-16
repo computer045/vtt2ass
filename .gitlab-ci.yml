@@ -1,0 +1,21 @@
+image: ruby:2.7.2
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - ./bin/setup
+    - rake test
+
+build:
+  stage: build
+  only:
+    - master
+  artifacts:
+    untracked: true
+  script:
+    - mkdir build
+    - gem build vtt2ass.gemspec -o "build/release.gem"

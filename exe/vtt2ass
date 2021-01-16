@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'vtt2ass'
+Vtt2ass::main

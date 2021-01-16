@@ -10,9 +10,10 @@ class ASSStyle
     # * Requires +params+, a string of VTT styling as input.
     # * Requires a video +width+ as input.
     # * Requires a video +height+ as input. 
-    def initialize(style_name, params, width, height)
+    def initialize(style_name, params, font_size, width, height)
         @width = width
         @height = height
+        @font_size = font_size
         @style_name = style_name
         assignParams(params)
     end
@@ -57,6 +58,6 @@ class ASSStyle
     ##
     # This method assigns the object values to an ASS style line and outputs it.
     def to_s
-        return "Style: #{@style_name},Open Sans Semibold,72.0,&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,#{@alignment},#{@left_margin},#{@right_margin},#{@vertical_margin},1"
+        return "Style: #{@style_name},Open Sans Semibold,#{@font_size},&H00FFFFFF,&H000000FF,&H00020713,&H00000000,-1,0,0,0,100,100,0,0,1,2.0,2.0,#{@alignment},#{@left_margin},#{@right_margin},#{@vertical_margin},1"
     end
 end
