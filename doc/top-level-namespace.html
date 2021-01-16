@@ -82,6 +82,8 @@
 <p class="children">
   
     
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Vtt2ass.html" title="Vtt2ass (module)">Vtt2ass</a></span>
+    
   
     
       <strong class="classes">Classes:</strong> <span class='object_link'><a href="ASSFile.html" title="ASSFile (class)">ASSFile</a></span>, <span class='object_link'><a href="ASSStyle.html" title="ASSStyle (class)">ASSStyle</a></span>, <span class='object_link'><a href="ASSSubtitle.html" title="ASSSubtitle (class)">ASSSubtitle</a></span>, <span class='object_link'><a href="Application.html" title="Application (class)">Application</a></span>, <span class='object_link'><a href="VTTSubtitle.html" title="VTTSubtitle (class)">VTTSubtitle</a></span>
@@ -95,128 +97,14 @@
 
 
 
-  
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
 
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="top-level-namespace.html#main-instance_method" title="#main (instance method)">#<strong>main</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>This function creates a new application instance and starts the process.</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="main-instance_method">
-  
-    #<strong>main</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>This function creates a new application instance and starts the process.</p>
-
-<p>It also defines the arguments that can be provided from the CLI.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'vta.rb', line 11</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_main'>main</span>
-    <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-
-    <span class='const'>OptionParser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_opts'>opts</span><span class='op'>|</span>
-        <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_banner'>banner</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Usage: vta.rb [options]</span><span class='tstring_end'>&quot;</span></span>
-        <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_separator'>separator</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-        <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_separator'>separator</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Specific options:</span><span class='tstring_end'>&quot;</span></span>
-        <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-i</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--input DIRECTORY</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Specify a custom input directory (default: &#39;./input&#39;)</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dir'>dir</span><span class='op'>|</span>
-            <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:input</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_dir'>dir</span>
-        <span class='kw'>end</span>
-        <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-o</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--output DIRECTORY</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Specify a custom output directory (default: &#39;./output&#39;)</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dir'>dir</span><span class='op'>|</span>
-            <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:output</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_dir'>dir</span>
-        <span class='kw'>end</span>
-    <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_parse!'>parse!</span>
-
-    <span class='id identifier rubyid_app'>app</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Application.html" title="Application (class)">Application</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Application.html#initialize-instance_method" title="Application#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_app'>app</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  5 22:02:14 2021 by
+  Generated on Thu Jan 14 00:31:16 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.1).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>

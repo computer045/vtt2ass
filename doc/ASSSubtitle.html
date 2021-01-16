@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>src/ASSSubtitle.rb</dd>
+    <dd>lib/vtt2ass/ASSSubtitle.rb</dd>
   </dl>
   
 </div>
@@ -471,7 +471,7 @@
 19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_style'>style</span><span class='comma'>,</span> <span class='id identifier rubyid_time_start'>time_start</span><span class='comma'>,</span> <span class='id identifier rubyid_time_end'>time_end</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
     <span class='ivar'>@style</span> <span class='op'>=</span> <span class='id identifier rubyid_style'>style</span>
@@ -523,7 +523,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_params'>params</span>
   <span class='ivar'>@params</span>
@@ -566,7 +566,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_style'>style</span>
   <span class='ivar'>@style</span>
@@ -609,7 +609,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@text</span>
@@ -652,7 +652,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_end'>time_end</span>
   <span class='ivar'>@time_end</span>
@@ -695,7 +695,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_start'>time_start</span>
   <span class='ivar'>@time_start</span>
@@ -747,7 +747,7 @@
 56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convertTime'>convertTime</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_mTime'>mTime</span> <span class='op'>=</span> <span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([\d:]*)\.?(\d*)</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
@@ -806,7 +806,7 @@
 47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convertToAssText'>convertToAssText</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
@@ -868,7 +868,7 @@
 91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_padTimeNum'>padTimeNum</span><span class='lparen'>(</span><span class='id identifier rubyid_sep'>sep</span><span class='comma'>,</span> <span class='id identifier rubyid_input'>input</span><span class='comma'>,</span> <span class='id identifier rubyid_pad'>pad</span><span class='rparen'>)</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_sep'>sep</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_rjust'>rjust</span><span class='lparen'>(</span><span class='id identifier rubyid_pad'>pad</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -909,7 +909,7 @@
 25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
     <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Dialogue: 0,</span><span class='embexpr_beg'>#{</span><span class='ivar'>@time_start</span><span class='embexpr_end'>}</span><span class='tstring_content'>,</span><span class='embexpr_beg'>#{</span><span class='ivar'>@time_end</span><span class='embexpr_end'>}</span><span class='tstring_content'>,</span><span class='embexpr_beg'>#{</span><span class='ivar'>@style</span><span class='embexpr_end'>}</span><span class='tstring_content'>,,0,0,0,,</span><span class='embexpr_beg'>#{</span><span class='ivar'>@text</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -970,7 +970,7 @@
 81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'src/ASSSubtitle.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/vtt2ass/ASSSubtitle.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_toSubsTime'>toSubsTime</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1002,9 +1002,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  5 22:02:15 2021 by
+  Generated on Thu Jan 14 00:31:16 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.1).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>
