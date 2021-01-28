@@ -2,7 +2,7 @@ image: ruby:2.7.2
 
 stages:
   - test
-  - build
+  - deploy
 
 test:
   stage: test
@@ -10,12 +10,10 @@ test:
     - ./bin/setup
     - rake test
 
-build:
-  stage: build
+deploy:
+  stage: deploy
   only:
     - master
-  artifacts:
-    untracked: true
   script:
-    - mkdir build
-    - gem build vtt2ass.gemspec -o "build/release.gem"
+    - gem install dpl --pre
+    - dpl rubygems --api_key $K8S_SECRET_RUBYGEMS_API_KEY
