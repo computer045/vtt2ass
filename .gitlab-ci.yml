@@ -2,6 +2,7 @@ image: ruby:2.7.2
 
 stages:
   - test
+  - build
   - deploy
 
 test:
@@ -9,6 +10,15 @@ test:
   script:
     - ./bin/setup
     - rake test
+
+build:
+  stage: build
+  only:
+    - develop
+  artifacts:
+    untracked: true
+  script:
+    - gem build vtt2ass.gemspec
 
 deploy:
   stage: deploy
