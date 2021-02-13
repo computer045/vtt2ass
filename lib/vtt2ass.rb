@@ -23,7 +23,7 @@ module Vtt2ass
             opts.on("-o", "--output DIRECTORY", "Specify a custom output directory (default: './output')") do |dir|
                 options[:output] = dir
             end
-            opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 72)") do |size|
+            opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |size|
                 options[:font_size] = size
             end
             opts.on("-v", "--version", "Show version") do

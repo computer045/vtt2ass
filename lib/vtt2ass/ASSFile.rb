@@ -9,12 +9,12 @@ class ASSFile
     # * Requires +ass_subs+, a list of ASSSubtitles as input.
     # * Requires a video +width+ as input.
     # * Requires a video +height+ as input.
-    def initialize(ass_styles, ass_subs, width, height)
+    def initialize(title, ass_styles, ass_subs, width, height)
         @width = width
         @height = height
         @header = [
             '[Script Info]',
-            'Title: DKB Team',
+            "Title: #{title}",
             'ScriptType: v4.00+',
             'Collisions: Normal',
             'PlayDepth: 0',
