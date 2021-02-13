@@ -38,5 +38,6 @@ Usage: vtt2ass [options]
 Specific options:
     -i, --input DIRECTORY            Specify a custom input directory (default: './input')
     -o, --output DIRECTORY           Specify a custom output directory (default: './output')
-    -s, --font-size SIZE             Specify a font size for the subtitles (default: 72)
+    -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
+    -v, --version                    Show version
 ```
