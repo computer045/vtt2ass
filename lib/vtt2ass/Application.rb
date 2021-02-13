@@ -77,6 +77,6 @@ class Application
                 ass_styles.push(ASSStyle.new(sub.style, sub.params, @font_size, @width, @height))
             end
         end
-        return ASSFile.new(ass_styles, ass_subs, @width, @height).to_s
+        return ASSFile.new(File.basename(file_path).gsub('.vtt', ''), ass_styles, ass_subs, @width, @height).to_s
     end
 end
