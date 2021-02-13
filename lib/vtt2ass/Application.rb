@@ -20,7 +20,7 @@ class Application
         @output_dir = options[:output] ? options[:output]: "./output"
         @width = 1920
         @height = 1080
-        @font_size = options[:font_size] ? options[:font_size] : 72
+        @font_size = options[:font_size] ? options[:font_size] : 52
     end
 
     ##
