@@ -16,7 +16,7 @@ class Application
     # Creates a new Application instance.
     # It receives +options+ that can define the input and output directories.
     def initialize(options)
-        @input_dir = options[:input] ? options[:input].gsub('\\', '/').gsub(':', '') : "./input"
+        @input_dir = options[:input] ? options[:input].gsub('\\', '/') : "./input"
         @output_dir = options[:output] ? options[:output]: "./output"
         @width = 1920
         @height = 1080
