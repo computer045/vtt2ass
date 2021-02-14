@@ -17,7 +17,7 @@ class Application
     # It receives +options+ that can define the input and output directories.
     def initialize(options)
         @input_dir = options[:input] ? options[:input].gsub('\\', '/') : "./input"
-        @output_dir = options[:output] ? options[:output]: "./output"
+        @output_dir = options[:output] ? options[:output].gsub('\\', '/') : "./output"
         @width = 1920
         @height = 1080
         @font_size = options[:font_size] ? options[:font_size] : 52
