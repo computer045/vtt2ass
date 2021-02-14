@@ -16,8 +16,8 @@ class Application
     # Creates a new Application instance.
     # It receives +options+ that can define the input and output directories.
     def initialize(options)
-        @input_dir = options[:input] ? options[:input]: "./input"
-        @output_dir = options[:output] ? options[:output]: "./output"
+        @input_dir = options[:input] ? options[:input].gsub('\\', '/') : "./input"
+        @output_dir = options[:output] ? options[:output].gsub('\\', '/') : "./output"
         @width = 1920
         @height = 1080
         @font_size = options[:font_size] ? options[:font_size] : 52
@@ -44,7 +44,7 @@ class Application
     # It outputs a list named list_paragraph.
     def readVTTFile(file_path)
         list_parapraph = []
-        separator = OS.linux? ? "\r\n\r\n": "\n\n"
+        separator = OS.posix? ? "\r\n\r\n": "\n\n"
         File.foreach(file_path, separator) do |paragraph|
             paragraph = paragraph.rstrip.gsub(/\r\n/, "\n")
             if not paragraph.eql? "" then
