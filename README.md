@@ -1,5 +1,7 @@
 # VTT to ASS
 
+[![Gem Version](https://badge.fury.io/rb/vtt2ass.svg)](https://badge.fury.io/rb/vtt2ass)
+
 This is a simple application to convert VTT files to ASS subtitles.
 
 ## Requirements
@@ -41,3 +43,9 @@ Specific options:
     -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
     -v, --version                    Show version
 ```
+
+# Donate
+
+If you want to support me, consider buying me a coffee.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y136P0E)
