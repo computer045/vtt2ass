@@ -17,11 +17,14 @@ module Vtt2ass
             opts.banner = "Usage: vtt2ass [options]"
             opts.separator ""
             opts.separator "Specific options:"
-            opts.on("-i", "--input DIRECTORY", "Specify a custom input directory (default: './input')") do |dir|
+            opts.on("-i", "--input PATH", "Specify a custom input file or directory (default: './')") do |dir|
                 options[:input] = dir
             end
-            opts.on("-o", "--output DIRECTORY", "Specify a custom output directory (default: './output')") do |dir|
+            opts.on("-o", "--output PATH", "Specify a custom output directory (default: './')") do |dir|
                 options[:output] = dir
+            end
+            opts.on("-f", "--font-family SIZE", String, "Specify a font family for the subtitles (default: 'Open Sans Semibold')") do |size|
+                options[:font_family] = size
             end
             opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |size|
                 options[:font_size] = size
