@@ -23,6 +23,9 @@ module Vtt2ass
             opts.on("-o", "--output PATH", "Specify a custom output directory (default: './')") do |dir|
                 options[:output] = dir
             end
+            opts.on("-f", "--font-family SIZE", String, "Specify a font family for the subtitles (default: 'Open Sans Semibold')") do |size|
+                options[:font_family] = size
+            end
             opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |size|
                 options[:font_size] = size
             end
