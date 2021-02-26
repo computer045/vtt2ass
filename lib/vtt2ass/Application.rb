@@ -1,6 +1,5 @@
 # Imports
 require 'os'
-require 'fileutils'
 
 # Relative imports
 require_relative 'VTTSubtitle'
@@ -16,8 +15,8 @@ class Application
     # Creates a new Application instance.
     # It receives +options+ that can define the input and output directories.
     def initialize(options)
-        @input_dir = options[:input] ? options[:input].gsub('\\', '/') : "./input"
-        @output_dir = options[:output] ? options[:output].gsub('\\', '/') : "./output"
+        @input = options[:input] ? options[:input].gsub('\\', '/') : "./"
+        @output = options[:output] ? options[:output].gsub('\\', '/') : "./"
         @width = 1920
         @height = 1080
         @font_size = options[:font_size] ? options[:font_size] : 52
@@ -28,13 +27,22 @@ class Application
     # It sends the file_paths of VTT files in the input directory to convertFileToASS method
     # and outputs the resulting ASS format to a new file.
     def start
-        Dir["#{@input_dir}/*.vtt"].each do |file_path|
-            file_name = File.basename(file_path).gsub('.vtt', '.ass')
-            FileUtils.mkdir_p @output_dir
-            File.open("#{@output_dir}/" + file_name, 'w') do |line|
-                line.print "\ufeff"
-                line.puts convertFileToASS(file_path)
+        if File.directory?(@input) then
+            Dir["#{@input}/*.vtt"].each do |file_path|
+                writeFile(file_path)
             end
+        elsif File.file?(@input) then
+            writeFile(@input)
+        else
+            puts 'Error: input file or directory does not exist.'
+        end
+    end
+
+    def writeFile(file_path)
+        file_name = File.basename(file_path).gsub('.vtt', '.ass')
+        File.open("#{@output}/" + file_name, 'w') do |line|
+            line.print "\ufeff"
+            line.puts convertFileToASS(file_path)
         end
     end
 
