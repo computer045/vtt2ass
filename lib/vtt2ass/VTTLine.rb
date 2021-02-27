@@ -1,10 +1,10 @@
 ##
 # This class defines a VTT subtile line.
-class VTTSubtitle
+class VTTLine
     attr_reader :style, :time_start, :time_end, :params, :text
 
     ##
-    # This method creates an instance of an VTTSubtitle.
+    # This method creates an instance of an VTTLine.
     #
     # * Requires +paragraph+, a VTT formatted string as input.
     def initialize(paragraph)

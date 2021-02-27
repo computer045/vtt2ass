@@ -1,10 +1,10 @@
 ##
 # This class defines an ASS subtile line.
-class ASSSubtitle
+class ASSLine
     attr_reader :style, :time_start, :time_end, :params, :text
     
     ##
-    # This method creates an instance of an ASSSubtitle.
+    # This method creates an instance of an ASSLine.
     #
     # * Requires a +style+ name as input.
     # * Requires +time_start+, a VTT formatted timestamp as input.

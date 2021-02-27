@@ -17,17 +17,17 @@ module Vtt2ass
             opts.banner = "Usage: vtt2ass [options]"
             opts.separator ""
             opts.separator "Specific options:"
-            opts.on("-i", "--input PATH", "Specify a custom input file or directory (default: './')") do |dir|
-                options[:input] = dir
+            opts.on("-i", "--input PATH", "Specify a custom input file or directory (default: './')") do |file_path|
+                options[:input] = file_path
             end
-            opts.on("-o", "--output PATH", "Specify a custom output directory (default: './')") do |dir|
-                options[:output] = dir
+            opts.on("-o", "--output PATH", "Specify a custom output directory (default: './')") do |file_path|
+                options[:output] = file_path
             end
-            opts.on("-f", "--font-family SIZE", String, "Specify a font family for the subtitles (default: 'Open Sans Semibold')") do |size|
-                options[:font_family] = size
+            opts.on("-f", "--font-family FONT", String, "Specify a font family for the subtitles (default: 'Open Sans Semibold')") do |font_family|
+                options[:font_family] = font_family
             end
-            opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |size|
-                options[:font_size] = size
+            opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |font_size|
+                options[:font_size] = font_size
             end
             opts.on("-v", "--version", "Show version") do
                 puts Vtt2ass::VERSION
