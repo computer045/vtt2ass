@@ -40,7 +40,7 @@ Usage: vtt2ass [options]
 Specific options:
     -i, --input PATH                 Specify a custom input file or directory (default: './')
     -o, --output PATH                Specify a custom output directory (default: './')
-    -f, --font-family SIZE           Specify a font family for the subtitles (default: 'Open Sans Semibold')
+    -f, --font-family FONT           Specify a font family for the subtitles (default: 'Open Sans Semibold')
     -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
     -v, --version                    Show version
 ```
