@@ -1,7 +1,7 @@
 ##
 # This class defines an ASS subtile line.
 class ASSLine
-    attr_reader :style, :time_start, :time_end, :params, :text
+    attr_reader :style, :time_start, :time_end, :text
     
     ##
     # This method creates an instance of an ASSLine.
@@ -10,11 +10,10 @@ class ASSLine
     # * Requires +time_start+, a VTT formatted timestamp as input.
     # * Requires +time_start+, a VTT formatted timestamp as input.
     # * Requires +text+, a VTT formatted string as input.
-    def initialize(style, time_start, time_end, params, text)
+    def initialize(style, time_start, time_end, text)
         @style = style
         @time_start = convertTime(time_start)
         @time_end = convertTime(time_end)
-        @params = params
         @text = convertToAssText(text)
     end
 

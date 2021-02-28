@@ -36,7 +36,7 @@ class ASSFile
 
     def convertVTTtoASS(vtt_file, font_family, font_size)
         vtt_file.lines.each do |line|
-            @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.params, line.text))
+            @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
             style_exists = false
             @ass_styles.each do |style|
                 if (style.style_name == line.style) then

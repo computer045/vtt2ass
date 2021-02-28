@@ -14,6 +14,10 @@ class Vtt2assTest < Minitest::Test
   end
 
   def test_that_vtt_file_is_not_nil
+    refute_nil @vtt_file
+  end
+
+  def test_that_vtt_file_has_lines
     refute_nil @vtt_file.lines
   end
 
@@ -29,12 +33,12 @@ class Vtt2assTest < Minitest::Test
     assert_instance_of VTTLine, @vtt_file.lines[8]
   end
 
-  def test_vtt_line_start_time_format
+  def test_vtt_line_time_start_format
     assert_match (/([\d:]*)\.?(\d*)/), @vtt_file.lines[22].time_start
   end
 
-  def test_vtt_line_end_time_format
-    assert_match (/([\d:]*)\.?(\d*)/), @vtt_file.lines[46].time_end
+  def test_vtt_line_time_end_format
+    assert_match (/([\d:]*)\.?(\d*)/), @vtt_file.lines[22].time_end
   end
 
   def test_vtt_line_style_not_empty
@@ -43,6 +47,26 @@ class Vtt2assTest < Minitest::Test
 
   def test_vtt_line_text_not_empty
     refute_empty @vtt_file.lines[88].text
+  end
+
+  def test_ass_file_creation_not_nil
+    refute_nil @ass_file
+  end
+
+  def test_ass_file_styles_not_empty
+    refute_empty @ass_file.ass_styles
+  end
+
+  def test_ass_file_lines_not_empty
+    refute_empty @ass_file.ass_lines
+  end
+
+  def test_ass_line_time_start_format
+    assert_match (/\d:\d\d:\d\d.\d\d/), @ass_file.ass_lines[15].time_start
+  end
+
+  def test_ass_line_time_end_format
+    assert_match (/\d:\d\d:\d\d.\d\d/), @ass_file.ass_lines[15].time_end
   end
 
 end
