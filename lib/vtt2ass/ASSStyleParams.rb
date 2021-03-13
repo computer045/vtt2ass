@@ -1,7 +1,7 @@
 ##
 # This class defines the ASS style parameters from VTT cue settings.
 class ASSStyleParams
-    attr_reader :horizontal_margin, :vertical_margin, :alignment
+    attr_reader :horizontal_margin, :vertical_margin, :alignment, :align
 
     def initialize(params, width, height)
         (params.split(' ').map { |p| p.split(':') }).each do |p|
@@ -11,8 +11,8 @@ class ASSStyleParams
             when 'line'
                 @line = p[1].gsub(/%/, '').to_i
                 @line = @line == -1 ? 100 : @line;
-            when 'alignment'
-                @align = p[1]
+            when 'align'
+                @align = p[1].chomp
             end
         end
         createAlignment()
@@ -20,18 +20,15 @@ class ASSStyleParams
         createVerticalMargin(height)
     end
 
-    def createAlignment
+    def createAlignment()
         if (defined?(@line) and not defined?(@position)) then
             if (defined?(@align)) then
                 case @align
-                when 'left'
-                when 'start'
+                when 'left', 'start'
                     @alignment = @line >= 50 ? 1 : 7
-                when 'right'
-                when 'end'
+                when 'right', 'end'
                     @alignment = @line >= 50 ? 3 : 9
-                when 'center'
-                when 'middle'
+                when 'center', 'middle'
                     @alignment = @line >= 50 ? 2 : 8
                 end
             else
@@ -40,7 +37,17 @@ class ASSStyleParams
         elsif (defined?(@line) and defined?(@position)) then
             @alignment = 1
         else
-            @alignment = 2
+            puts @align
+            case @align
+            when 'left', 'start'
+                @alignment = 1
+            when 'right', 'end'
+                @alignment = 3
+            when 'center', 'middle'
+                @alignment = 2
+            else
+                @alignment = 2
+            end
         end
     end
 
