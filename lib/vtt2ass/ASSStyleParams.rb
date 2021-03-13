@@ -37,7 +37,6 @@ class ASSStyleParams
         elsif (defined?(@line) and defined?(@position)) then
             @alignment = 1
         else
-            puts @align
             case @align
             when 'left', 'start'
                 @alignment = 1
