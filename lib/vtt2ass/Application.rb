@@ -15,6 +15,7 @@ class Application
     def initialize(options)
         @input = options[:input] ? options[:input].gsub('\\', '/') : "./"
         @output = options[:output] ? options[:output].gsub('\\', '/') : "./"
+        puts @output
         @width = 1920
         @height = 1080
         @font_family = options[:font_family] ? options[:font_family] : 'Open Sans Semibold'
@@ -31,7 +32,7 @@ class Application
                 vtt_to_ass(file_path).writeToFile(File.basename(file_path).gsub('.vtt', '.ass'))
             end
         elsif File.file?(@input) then
-            vtt_to_ass(@input).writeToFile(File.basename(@input).gsub('.vtt', '.ass'))
+            vtt_to_ass(@input).writeToFile(@output + File.basename(@input).gsub('.vtt', '.ass'))
         else
             puts 'Error: input file or directory does not exist.'
         end

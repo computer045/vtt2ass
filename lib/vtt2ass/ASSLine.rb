@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 ##
 # This class defines an ASS subtile line.
 class ASSLine
@@ -28,6 +30,7 @@ class ASSLine
     #
     # * Requires +text+, a string of VTT formated text as input.  
     def convertToAssText(text)
+        decoder = HTMLEntities.new()
         text = text
             .gsub(/\r/, '')
             .gsub(/\n/, '\\N')
@@ -42,7 +45,7 @@ class ASSLine
             .gsub(/<[^>]>/, '')
             .gsub(/\\N$/, '')
             .gsub(/ +$/, '')
-        return text
+        return decoder.decode(text)
     end
 
     ##

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'os'
+gem 'htmlentities'
 gem 'yard'
 gem "rake", "~> 12.0"
 gem "minitest", "~> 5.0"
