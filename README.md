@@ -42,6 +42,7 @@ Specific options:
     -o, --output PATH                Specify a custom output directory (default: './')
     -f, --font-family FONT           Specify a font family for the subtitles (default: 'Open Sans Semibold')
     -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
+    -t, --title TITLE                Specify a title for you file. If the input is a directory, all files will share the same title.
     -v, --version                    Show version
 ```
 
