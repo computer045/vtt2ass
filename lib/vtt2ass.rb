@@ -29,6 +29,9 @@ module Vtt2ass
             opts.on("-s", "--font-size SIZE", Integer, "Specify a font size for the subtitles (default: 52)") do |font_size|
                 options[:font_size] = font_size
             end
+            opts.on("-t", "--title TITLE", String, "Specify a title for you file. If the input is a directory, all files will share the same title.") do |title|
+                options[:title] = title
+            end
             opts.on("-v", "--version", "Show version") do
                 puts Vtt2ass::VERSION
                 exit

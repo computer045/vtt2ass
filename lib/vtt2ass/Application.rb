@@ -19,6 +19,9 @@ class Application
         @height = 1080
         @font_family = options[:font_family] ? options[:font_family] : 'Open Sans Semibold'
         @font_size = options[:font_size] ? options[:font_size] : 52
+        if options[:title] then
+            @title = options[:title]
+        end
     end
 
     ##
@@ -28,7 +31,7 @@ class Application
     def start
         if File.directory?(@input) then
             Dir["#{@input}/*.vtt"].each do |file_path|
-                vtt_to_ass(file_path).writeToFile(File.basename(file_path).gsub('.vtt', '.ass'))
+                vtt_to_ass(file_path).writeToFile(@output + File.basename(file_path).gsub('.vtt', '.ass'))
             end
         elsif File.file?(@input) then
             vtt_to_ass(@input).writeToFile(@output + File.basename(@input).gsub('.vtt', '.ass'))
@@ -39,7 +42,11 @@ class Application
 
     def vtt_to_ass(file_path)
         vtt_file = VTTFile.new(file_path)
-        ass_file = ASSFile.new(File.basename(file_path).gsub('.vtt', ''), @width, @height)
+        ass_file = ASSFile.new(
+            (defined?(@title) ? @title : File.basename(file_path).gsub('.vtt', '')),
+            @width,
+            @height
+        )
         ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size)
         return ass_file
     end
