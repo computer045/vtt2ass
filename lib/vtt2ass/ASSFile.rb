@@ -8,6 +8,8 @@ class ASSFile
     attr_reader :title, :width, :height
     attr_accessor :ass_styles, :ass_lines
 
+    ##
+    # Creates a new ASSFile instance and assigns the default values of instance variables.
     def initialize(title, width, height)
         @width = width
         @height = height
@@ -34,6 +36,10 @@ class ASSFile
         @ass_lines = []
     end
 
+    ##
+    # This method receives a VTTFile object and font arguments creates new ASSLine with the params of 
+    # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
+    # will be used in the ASS style list.
     def convertVTTtoASS(vtt_file, font_family, font_size)
         vtt_file.lines.each do |line|
             @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
@@ -50,6 +56,8 @@ class ASSFile
         end
     end
 
+    ##
+    # This method writes the content of the ASSFile object into a file path that is provided.
     def writeToFile(file_path)
         File.open(file_path, 'w') do |line|
             line.print "\ufeff"

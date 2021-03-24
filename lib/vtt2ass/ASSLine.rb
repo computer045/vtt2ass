@@ -83,7 +83,7 @@ class ASSLine
     end
     
     ##
-    # The method pads text so that time numbers are a fixed number of digit.
+    # This method pads text so that time numbers are a fixed number of digit.
     #
     # * Requires +sep+, a string separator.
     # * Requires +input+, an integer.
