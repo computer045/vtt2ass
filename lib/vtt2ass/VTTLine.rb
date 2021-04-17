@@ -22,7 +22,7 @@ class VTTLine
                 @time_start = m[1]
                 @time_end = m[2]
                 @params = m[3]
-                if @params.include? "align:middle line:7%" then
+                if @params.include? "align:middle line:7%" or @params.include? "align:middle line:10%" then
                     @style = "MainTop"
                 end
             else

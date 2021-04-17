@@ -1,7 +1,7 @@
 ##
 # This class defines the ASS style parameters from VTT cue settings.
 class ASSStyleParams
-    attr_reader :horizontal_margin, :vertical_margin, :alignment, :align
+    attr_accessor :horizontal_margin, :vertical_margin, :alignment, :align
 
     ##
     # Creates an instance of ASSStyleParams

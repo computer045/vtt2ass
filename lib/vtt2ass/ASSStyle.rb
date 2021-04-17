@@ -20,6 +20,9 @@ class ASSStyle
         @font_size = font_size
         @style_name = style_name
         @s_params = ASSStyleParams.new(params, width, height)
+        if style_name.eql? 'MainTop'
+            @s_params.vertical_margin = 50
+        end
     end
 
     ##
