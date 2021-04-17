@@ -1,6 +1,3 @@
-# Imports
-require 'os'
-
 # Relative imports
 require_relative 'VTTFile'
 require_relative 'ASSFile'
