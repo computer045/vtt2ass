@@ -41,7 +41,7 @@ class Application
     # This method creates a new VTTFile object from the file path provided and convert its content
     # inside a new ASSFile object.
     def vtt_to_ass(file_path)
-        vtt_file = VTTFile.new(file_path)
+        vtt_file = VTTFile.new(file_path, @width, @height)
         ass_file = ASSFile.new(
             (defined?(@title) ? @title : File.basename(file_path).gsub('.vtt', '')),
             @width,
