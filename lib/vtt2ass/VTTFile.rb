@@ -8,7 +8,7 @@ class VTTFile
 
     ##
     # Creates a new VTTFile instance and assigns the default values of instance variables.
-    def initialize(file_path)
+    def initialize(file_path, width, height)
         @title = File.basename(file_path).gsub('.vtt', '')
         @lines = []
         separator = determine_line_ending(file_path) ? "\n\n" : "\r\n\r\n"
@@ -16,7 +16,7 @@ class VTTFile
         File.foreach(file_path, separator) do |paragraph|
             paragraph = paragraph.rstrip.gsub(/[\r\n]/, "\n")
             if not paragraph.eql? "" then
-                vtt_line = VTTLine.new(paragraph)
+                vtt_line = VTTLine.new(paragraph, width, height)
                 @lines.push(vtt_line)
                 count += 1
             end

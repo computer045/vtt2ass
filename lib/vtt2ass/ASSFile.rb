@@ -45,7 +45,7 @@ class ASSFile
             @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
             style_exists = false
             @ass_styles.each do |style|
-                if (style.style_name == line.style) then
+                if (style.style_name.eql? line.style) then
                     style_exists = true
                     break
                 end

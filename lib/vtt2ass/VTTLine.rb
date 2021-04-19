@@ -7,7 +7,7 @@ class VTTLine
     # This method creates an instance of an VTTLine.
     #
     # * Requires +paragraph+, a VTT formatted string as input.
-    def initialize(paragraph)
+    def initialize(paragraph, width, height)
         lines = paragraph.split("\n")
         rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
         @style = "Main"
@@ -22,7 +22,8 @@ class VTTLine
                 @time_start = m[1]
                 @time_end = m[2]
                 @params = m[3]
-                if @params.include? "align:middle line:7%" or @params.include? "align:middle line:10%" then
+                ass_style = ASSStyleParams.new(@params, width, height)
+                if @style.eql? 'Main' and ass_style.alignment == 8 then
                     @style = "MainTop"
                 end
             else
