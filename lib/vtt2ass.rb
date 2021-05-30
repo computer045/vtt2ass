@@ -93,6 +93,12 @@ class Command
     end
 end
 
-app = Command.new
-app.parse
-app.run
+module Vtt2ass
+    def main
+        app = Command.new
+        app.parse
+        app.run
+    end
+
+    module_function :main
+end

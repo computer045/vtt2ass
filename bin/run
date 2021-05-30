@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/vtt2ass'
+Vtt2ass::main
