@@ -31,6 +31,8 @@ class VTTLine
             end
             count += 1;
         end
+
+        @text = @text.lstrip
     end
 
     ##
