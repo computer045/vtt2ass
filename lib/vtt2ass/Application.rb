@@ -19,6 +19,7 @@ class Application
         if options[:title] then
             @title = options[:title]
         end
+        @quiet = options[:quiet]
     end
 
     ##
@@ -28,13 +29,19 @@ class Application
     def start
         if File.directory?(@input) then
             Dir["#{@input}/*.vtt"].each do |file_path|
-                vtt_to_ass(file_path).writeToFile(@output + '/' + File.basename(file_path).gsub('.vtt', '.ass'))
+                convert(file_path)
             end
         elsif File.file?(@input) then
-            vtt_to_ass(@input).writeToFile(@output + '/' + File.basename(@input).gsub('.vtt', '.ass'))
+            convert(@input)
         else
             puts 'Error: input file or directory does not exist.'
         end
+    end
+
+    def convert(input_path)
+        ass_file = vtt_to_ass(input_path)
+        ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass'))
+        puts ass_file.to_s unless @quiet
     end
 
     ##
