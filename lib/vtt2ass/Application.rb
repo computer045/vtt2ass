@@ -20,6 +20,7 @@ class Application
             @title = options[:title]
         end
         @quiet = options[:quiet]
+        @noout = options[:noout]
     end
 
     ##
@@ -40,7 +41,7 @@ class Application
 
     def convert(input_path)
         ass_file = vtt_to_ass(input_path)
-        ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass'))
+        ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass')) unless @noout
         puts ass_file.to_s unless @quiet
     end
 

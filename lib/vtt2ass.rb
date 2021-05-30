@@ -53,6 +53,12 @@ class Command
         desc "Prevent the command from outputing to the console"
     end
 
+    flag :noout do
+        short "-x"
+        long "--noout"
+        desc "Prevents the command from writing the resulting file(s) to the output folder"
+    end
+
     # ------------------------------
     # Options
     # ------------------------------
