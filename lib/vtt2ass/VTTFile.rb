@@ -24,6 +24,8 @@ class VTTFile
         @lines.shift
     end
 
+    ##
+    # This method determines the line ending character to use as a separator.
     def determine_line_ending(file_path)
         File.open(file_path, 'r') do |file|
             return file.readline[/\r?\n$/] == "\n"

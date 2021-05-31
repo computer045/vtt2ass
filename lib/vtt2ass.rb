@@ -5,6 +5,8 @@ require 'tty-option'
 require_relative 'vtt2ass/version'
 require_relative 'vtt2ass/Application'
 
+##
+# This class describes the command-line arguments and flags available to the application
 class Command
     include TTY::Option
 
@@ -14,7 +16,9 @@ class Command
         command ''
         desc 'Convert VTT subtitles to ASS subtitles'
         example "Convert files in a specific directory",
-                "  $ vtt2ass /path/to/file_input /path/to/file_output"
+                "  $ vtt2ass /path/to/file_input /path/to/file_output",
+                "Convert and show the file without creating the output file",
+                "  $ vtt2ass -x /path/to/file"
     end
 
     # ------------------------------
@@ -99,6 +103,8 @@ class Command
     end
 end
 
+##
+# This module serves as a launcher for the application
 module Vtt2ass
     def main
         app = Command.new
