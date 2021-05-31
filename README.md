@@ -24,26 +24,34 @@ gem build vtt2ass.gemspec
 
 ## Usage
 
-Add your VTT files in your `input` directory.
-
-Run this command:
-```bash
-$ vtt2ass
-```
-
-## Help
-
 ```bash
 $ vtt2ass -h
-Usage: vtt2ass [options]
+VTT2ASS
 
-Specific options:
-    -i, --input PATH                 Specify a custom input file or directory (default: './')
-    -o, --output PATH                Specify a custom output directory (default: './')
-    -f, --font-family FONT           Specify a font family for the subtitles (default: 'Open Sans Semibold')
-    -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
-    -t, --title TITLE                Specify a title for you file. If the input is a directory, all files will share the same title.
-    -v, --version                    Show version
+Usage: vtt2ass  [OPTIONS] [INPUT] [OUTPUT]
+
+Convert VTT subtitles to ASS subtitles
+
+Arguments:
+  INPUT   Input directory or file (default: current directory)
+  OUTPUT  Output directory (default: current directory)
+
+Options:
+  -f, --font-family STRING  Specify a font family for the subtitles (default:
+                            'Open Sans Semibold')
+  -s, --font-size INTEGER   Specify a font size for the subtitles (default:
+                            52)
+  -h, --help                Print usage
+  -x, --noout               Prevents the command from writing the resulting
+                            file(s) to the output folder
+  -q, --quiet               Prevent the command from outputing to the console
+  -t, --title STRING        Specify a title for you file. If the input is a
+                            directory, all files will share the same title.
+  -v, --version             Show version
+
+Examples:
+  Convert files in a specific directory
+    $ vtt2ass /path/to/file_input /path/to/file_output
 ```
 
 # Donate

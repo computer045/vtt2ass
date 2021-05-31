@@ -14,7 +14,7 @@ class Command
         command ''
         desc 'Convert VTT subtitles to ASS subtitles'
         example "Convert files in a specific directory",
-                "  $ vtt2ass ./path/to/file_input ./path/to/file_output"
+                "  $ vtt2ass /path/to/file_input /path/to/file_output"
     end
 
     # ------------------------------
@@ -28,7 +28,7 @@ class Command
 
     argument :output do
         optional
-        desc "Output directory (default: console output)"
+        desc "Output directory (default: current directory)"
     end
 
     # ------------------------------
