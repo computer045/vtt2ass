@@ -25,33 +25,20 @@ gem build vtt2ass.gemspec
 ## Usage
 
 ```bash
-$ vtt2ass -h
-VTT2ASS
-
-Usage: vtt2ass  [OPTIONS] [INPUT] [OUTPUT]
-
-Convert VTT subtitles to ASS subtitles
-
-Arguments:
-  INPUT   Input directory or file (default: current directory)
-  OUTPUT  Output directory (default: current directory)
+$ ./bin/vtt2ass help convert
+Usage:
+  vtt2ass convert INPUT
 
 Options:
-  -f, --font-family STRING  Specify a font family for the subtitles (default:
-                            'Open Sans Semibold')
-  -s, --font-size INTEGER   Specify a font size for the subtitles (default:
-                            52)
-  -h, --help                Print usage
-  -x, --noout               Prevents the command from writing the resulting
-                            file(s) to the output folder
-  -q, --quiet               Prevent the command from outputing to the console
-  -t, --title STRING        Specify a title for you file. If the input is a
-                            directory, all files will share the same title.
-  -v, --version             Show version
+  -o, [--output=OUTPUT]            # Output directory of the converted file
+  -t, [--title=TITLE]              # Specify a title for you file. If the input is a directory, all files will share the same title.
+  -s, [--font-size=N]              # Specify a font size for the subtitles
+                                   # Default: 52
+  -f, [--font-family=FONT_FAMILY]  # Specify a font family for the subtitles
+                                   # Default: Open Sans Semibold
+  -q, [--quiet], [--no-quiet]      # Don't output to the console
 
-Examples:
-  Convert files in a specific directory
-    $ vtt2ass /path/to/file_input /path/to/file_output
+Run the VTT to ASS conversion for the specified file(s)
 ```
 
 # Donate
