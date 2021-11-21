@@ -25,6 +25,12 @@ gem build vtt2ass.gemspec
 ## Usage
 
 ```bash
+$ ./bin/vtt2ass
+Commands:
+  vtt2ass convert INPUT   # Run the VTT to ASS conversion for the specified file(s)
+  vtt2ass help [COMMAND]  # Describe available commands or one specific command
+  vtt2ass version         # Show version
+
 $ ./bin/vtt2ass help convert
 Usage:
   vtt2ass convert INPUT
