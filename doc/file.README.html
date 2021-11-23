@@ -73,7 +73,10 @@
 
 <h2 id="label-Installation">Installation</h2>
 
-<p>To install: <code>bash gem install vtt2ass </code></p>
+<p>To install:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_vtt2ass'>vtt2ass</span>
+</code></pre>
 
 <h1 id="label-Build">Build</h1>
 
@@ -82,33 +85,26 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<pre class="code ruby"><code class="ruby">$ vtt2ass -h
-VTT2ASS
+<pre class="code ruby"><code class="ruby">$ vtt2ass
+Commands:
+  vtt2ass convert INPUT   # Run the VTT to ASS conversion for the specified file(s)
+  vtt2ass help [COMMAND]  # Describe available commands or one specific command
+  vtt2ass version         # Show version
 
-Usage: vtt2ass  [OPTIONS] [INPUT] [OUTPUT]
-
-Convert VTT subtitles to ASS subtitles
-
-Arguments:
-  INPUT   Input directory or file (default: current directory)
-  OUTPUT  Output directory (default: current directory)
+$ vtt2ass help convert
+Usage:
+  vtt2ass convert INPUT
 
 Options:
-  -f, --font-family STRING  Specify a font family for the subtitles (default:
-                            &#39;Open Sans Semibold&#39;)
-  -s, --font-size INTEGER   Specify a font size for the subtitles (default:
-                            52)
-  -h, --help                Print usage
-  -x, --noout               Prevents the command from writing the resulting
-                            file(s) to the output folder
-  -q, --quiet               Prevent the command from outputing to the console
-  -t, --title STRING        Specify a title for you file. If the input is a
-                            directory, all files will share the same title.
-  -v, --version             Show version
+  -o, [--output=OUTPUT]            # Output directory of the converted file
+  -t, [--title=TITLE]              # Specify a title for you file. If the input is a directory, all files will share the same title.
+  -s, [--font-size=N]              # Specify a font size for the subtitles
+                                   # Default: 52
+  -f, [--font-family=FONT_FAMILY]  # Specify a font family for the subtitles
+                                   # Default: Open Sans Semibold
+  -q, [--quiet], [--no-quiet]      # Don&#39;t output to the console
 
-Examples:
-  Convert files in a specific directory
-    $ vtt2ass /path/to/file_input /path/to/file_output
+Run the VTT to ASS conversion for the specified file(s)
 </code></pre>
 
 <h1 id="label-Donate">Donate</h1>
@@ -119,9 +115,9 @@ Examples:
 </div></div>
 
       <div id="footer">
-  Generated on Mon May 31 19:29:31 2021 by
+  Generated on Mon Nov 22 21:31:13 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-3.0.0).
+  0.9.26 (ruby-3.0.2).
 </div>
 
     </div>
