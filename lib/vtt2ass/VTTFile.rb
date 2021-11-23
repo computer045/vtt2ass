@@ -18,7 +18,10 @@ class VTTFile
             paragraph = paragraph.rstrip.gsub(/[\r\n]/, "\n")
             if not paragraph.eql? "" then
                 vtt_line = VTTLine.new(paragraph, width, height)
-                if vtt_line.style.eql? 'Main' and not vtt_line.params.to_s.empty? then
+                if vtt_line.style.eql? 'Main' and
+                    not vtt_line.params.to_s.empty? and
+                    (not vtt_line.params.to_s.eql? 'align:middle' and
+                    not vtt_line.params.to_s.eql? 'align:center') then
                     vtt_line.style = "Style#{style_count}"
                     style_count += 1
                 end
