@@ -1,7 +1,8 @@
 ##
 # This class defines a VTT subtile line.
 class VTTLine
-    attr_reader :style, :time_start, :time_end, :params, :text
+    attr_accessor :style
+    attr_reader :time_start, :time_end, :params, :text
 
     ##
     # This method creates an instance of an VTTLine.
@@ -24,7 +25,7 @@ class VTTLine
                 @params = m[3]
                 ass_style = ASSStyleParams.new(@params, width, height)
                 if @style.eql? 'Main' and ass_style.alignment == 8 then
-                    @style = "MainTop"
+                    @style = 'MainTop'
                 end
             else
                 @text += line + "\n"

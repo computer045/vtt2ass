@@ -73,7 +73,10 @@
 
 <h2 id="label-Installation">Installation</h2>
 
-<p>To install: <code>bash gem install vtt2ass </code></p>
+<p>To install:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_vtt2ass'>vtt2ass</span>
+</code></pre>
 
 <h1 id="label-Build">Build</h1>
 
@@ -82,22 +85,26 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<p>Add your VTT files in your <code>input</code> directory.</p>
+<pre class="code ruby"><code class="ruby">$ vtt2ass
+Commands:
+  vtt2ass convert INPUT   # Run the VTT to ASS conversion for the specified file(s)
+  vtt2ass help [COMMAND]  # Describe available commands or one specific command
+  vtt2ass version         # Show version
 
-<p>Run this command: <code>bash $ vtt2ass </code></p>
+$ vtt2ass help convert
+Usage:
+  vtt2ass convert INPUT
 
-<h2 id="label-Help">Help</h2>
+Options:
+  -o, [--output=OUTPUT]            # Output directory of the converted file
+  -t, [--title=TITLE]              # Specify a title for you file. If the input is a directory, all files will share the same title.
+  -s, [--font-size=N]              # Specify a font size for the subtitles
+                                   # Default: 52
+  -f, [--font-family=FONT_FAMILY]  # Specify a font family for the subtitles
+                                   # Default: Open Sans Semibold
+  -q, [--quiet], [--no-quiet]      # Don&#39;t output to the console
 
-<pre class="code ruby"><code class="ruby">$ vtt2ass -h
-Usage: vtt2ass [options]
-
-Specific options:
-    -i, --input PATH                 Specify a custom input file or directory (default: &#39;./&#39;)
-    -o, --output PATH                Specify a custom output directory (default: &#39;./&#39;)
-    -f, --font-family FONT           Specify a font family for the subtitles (default: &#39;Open Sans Semibold&#39;)
-    -s, --font-size SIZE             Specify a font size for the subtitles (default: 52)
-    -t, --title TITLE                Specify a title for you file. If the input is a directory, all files will share the same title.
-    -v, --version                    Show version
+Run the VTT to ASS conversion for the specified file(s)
 </code></pre>
 
 <h1 id="label-Donate">Donate</h1>
@@ -108,9 +115,9 @@ Specific options:
 </div></div>
 
       <div id="footer">
-  Generated on Tue Mar 23 21:07:02 2021 by
+  Generated on Mon Nov 22 21:50:10 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-3.0.0).
+  0.9.26 (ruby-3.0.2).
 </div>
 
     </div>

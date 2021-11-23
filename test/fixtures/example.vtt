@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:00.000
+Testing empty alignement without style name.
+
+00:00:00.000 --> 00:00:00.000 align:middle
+Testing alignement "middle" without style name.
+
+00:00:00.000 --> 00:00:00.000 align:left
+Testing alignement "left" without style name.
+
+00:00:00.000 --> 00:00:00.000 align:right
+Testing alignement "right" without style name.
+
+Align-Empty
+00:00:00.000 --> 00:00:00.000
+Testing empty alignement with style name.
+
+Align-Middle
+00:00:00.000 --> 00:00:00.000 align:middle
+Testing alignement "middle" with style name.
+
+Align-Left
+00:00:00.000 --> 00:00:00.000 align:left
+Testing alignement "left" with style name.
+
+Align-Right
+00:00:00.000 --> 00:00:00.000 align:right
+Testing alignement "right" with style name.
+
+00:00:00.000 --> 00:00:00.000 line:25%
+Testing line:25% param without style name.
+
+00:00:00.000 --> 00:00:00.000 line:75%
+Testing line:75% param without style name.
+
+00:00:00.000 --> 00:00:00.000 line:50%
+Testing line:50% param without style name.
+
+Line25
+00:00:00.000 --> 00:00:00.000 line:25%
+Testing line:25% param with style name.
+
+Line75
+00:00:00.000 --> 00:00:00.000 line:75%
+Testing line:75% param with style name.
+
+Line50
+00:00:00.000 --> 00:00:00.000 line:50%
+Testing line:50% param with style name.
+
+00:00:00.000 --> 00:00:00.000 position:25%
+Testing position:25% param without style name.
+
+00:00:00.000 --> 00:00:00.000 position:75%
+Testing position:75% param without style name.
+
+00:00:00.000 --> 00:00:00.000 position:50%
+Testing position:50% param without style name.
+
+Position25
+00:00:00.000 --> 00:00:00.000 position:25%
+Testing position:25% param with style name.
+
+Position75
+00:00:00.000 --> 00:00:00.000 position:75%
+Testing position:75% param with style name.
+
+Position50
+00:00:00.000 --> 00:00:00.000 position:50%
+Testing position:50% param with style name.
+
+00:00:00.000 --> 00:00:00.000 line:25% position:25%
+Testing line:25% and position:25% params without style name.
+
+00:00:00.000 --> 00:00:00.000 line:75% position:25%
+Testing line:75% and position:25% params without style name.
+
+00:00:00.000 --> 00:00:00.000 line:25% position:75%
+Testing line:25% and position:75% params without style name.
+
+00:00:00.000 --> 00:00:00.000 line:75% position:75%
+Testing line:75% and position:75% params without style name.
+
+00:00:00.000 --> 00:00:00.000 line:50% position:50%
+Testing line:50% and position:50% params without style name.
+
+Line25-Position25
+00:00:00.000 --> 00:00:00.000 line:25% position:25%
+Testing line:25% and position:25% params with style name.
+
+Line75-Position25
+00:00:00.000 --> 00:00:00.000 line:75% position:25%
+Testing line:75% and position:25% params with style name.
+
+Line25-Position75
+00:00:00.000 --> 00:00:00.000 line:25% position:75%
+Testing line:25% and position:75% params with style name.
+
+Line75-Position75
+00:00:00.000 --> 00:00:00.000 line:75% position:75%
+Testing line:75% and position:75% params with style name.
+
+Line50-Position50
+00:00:00.000 --> 00:00:00.000 line:50% position:50%
+Testing line:50% and position:50% params with style name.

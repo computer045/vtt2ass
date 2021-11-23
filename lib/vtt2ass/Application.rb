@@ -9,9 +9,9 @@ class Application
     ##
     # Creates a new Application instance.
     # It receives +options+ that can define the input and output directories.
-    def initialize(options)
-        @input = options[:input] ? options[:input].gsub('\\', '/').delete_suffix('/') : "."
-        @output = options[:output] ? options[:output].gsub('\\', '/').delete_suffix('/') : "."
+    def initialize(input, options)
+        @input = input ? input.gsub('\\', '/').delete_suffix('/') : "."
+        @output = options[:output] ? options[:output].gsub('\\', '/').delete_suffix('/') : nil
         @width = 1920
         @height = 1080
         @font_family = options[:font_family] ? options[:font_family] : 'Open Sans Semibold'
@@ -41,7 +41,9 @@ class Application
 
     def convert(input_path)
         ass_file = vtt_to_ass(input_path)
-        ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass')) unless @noout
+        if (not @output.nil?) then
+            ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass'))
+        end
         puts ass_file.to_s unless @quiet
     end
 
