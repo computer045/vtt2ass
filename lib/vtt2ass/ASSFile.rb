@@ -1,6 +1,8 @@
 # Relative imports
 require_relative 'ASSLine'
 require_relative 'ASSStyle'
+require_relative 'CSSFile'
+require_relative 'CSSRule'
 
 ##
 # This class defines an ASS subtitle file.
@@ -10,9 +12,12 @@ class ASSFile
 
     ##
     # Creates a new ASSFile instance and assigns the default values of instance variables.
-    def initialize(title, width, height)
+    def initialize(title, width, height, css_file_path = nil)
         @width = width
         @height = height
+        if not css_file_path.nil? then
+            @css_file = CSSFile.new(css_file_path)
+        end
         @header = [
             '[Script Info]',
             "Title: #{title}",
@@ -41,6 +46,8 @@ class ASSFile
     # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
     # will be used in the ASS style list.
     def convertVTTtoASS(vtt_file, font_family, font_size)
+        fs = font_size
+        font_color = '&H00FFFFFF'
         vtt_file.lines.each do |line|
             @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
             style_exists = false
@@ -51,7 +58,27 @@ class ASSFile
                 end
             end
             if not style_exists then
-                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, @width, @height))
+                if defined?(@css_file) then
+                    css_rule = @css_file.find_rule(line.style)
+                    if not css_rule.nil? then
+                        css_rule.properties.each do |property|
+                            case property[:key]
+                            when 'font-family'
+                                font_family = property[:value].gsub('"', '').split(' ,').last
+                            when 'font-size'
+                                em_size = 1
+                                #em_size = property[:value][0].eql? '.' ? "0#{property[:value]}" : property[:value]
+                                if property[:value][0].eql? '.' then
+                                    em_size = "0#{property[:value]}".gsub('em', '').to_f
+                                end
+                                font_size = (fs * em_size).to_i
+                            when 'color'
+                                font_color = ASSStyle.convert_color(property[:value])
+                            end
+                        end
+                    end
+                end
+                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, @width, @height))
             end
         end
     end
