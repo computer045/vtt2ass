@@ -10,3 +10,7 @@ Gemfile.lock
 # Input and output folders
 input/
 output/
+
+# Subtitle files
+/*.vtt
+/*.ass
