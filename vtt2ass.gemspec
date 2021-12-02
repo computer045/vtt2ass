@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'htmlentities', '~> 4.3'
   spec.add_dependency 'thor', '~> 1.1'
+  spec.add_dependency 'redgreenblue', '~> 2.2'
 
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'minitest', '~> 5.0'
