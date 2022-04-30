@@ -45,12 +45,12 @@ class ASSFile
     # This method receives a VTTFile object and font arguments creates new ASSLine with the params of 
     # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
     # will be used in the ASS style list.
-    def convertVTTtoASS(vtt_file, font_family, font_size)
+    def convertVTTtoASS(vtt_file, font_family, font_size, line_offset)
         fs = font_size
-        font_color = '&H00FFFFFF'
-        is_italic = false
-        is_bold = false
         vtt_file.lines.each do |line|
+            font_color = '&H00FFFFFF'
+            is_italic = false
+            is_bold = false
             @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
             style_exists = false
             @ass_styles.each do |style|
@@ -88,7 +88,7 @@ class ASSFile
                         end
                     end
                 end
-                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic, @width, @height))
+                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic, line_offset, @width, @height))
             end
         end
     end

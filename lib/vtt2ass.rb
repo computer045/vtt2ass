@@ -16,6 +16,7 @@ class MainCommand < Thor
     method_option :font_size,   :aliases => '-s', :desc => 'Specify a font size for the subtitles', :default => 52, :type => :numeric
     method_option :font_family, :aliases => '-f', :desc => 'Specify a font family for the subtitles', :default => 'Open Sans Semibold', :type => :string
     method_option :css,         :aliases => '-c', :desc => 'Specify a CSS file path for Hidive subs', :type => :string
+    method_option :line_offset, :aliases => '-l', :desc => 'Specify a line offset for the main dialog (e.g. 50 lowers the text line by 50px of the total height)', :default => 0, :type => :numeric
     method_option :quiet,       :aliases => '-q', :desc => 'Don\'t output to the console', :type => :boolean
     def convert(input)
         app = Application.new(input, options)

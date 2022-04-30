@@ -23,6 +23,7 @@ class Application
         if options[:css] then
             @css = options[:css].gsub('\\', '/')
         end
+        @line_offset = options[:line_offset]
     end
 
     ##
@@ -60,7 +61,7 @@ class Application
             @height,
             defined?(@css) ? @css : nil
         )
-        ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size)
+        ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size, @line_offset)
         return ass_file
     end
 
