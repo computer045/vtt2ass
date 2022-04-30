@@ -3,8 +3,8 @@ class CSSRule
 
     def initialize(selector, declarations)
         @name = reduce_selector(selector)
+        @properties = []
         declarations.split(/;\s?/).each do |dec|
-            @properties = []
             temp = dec.split(/:\s?/)
             @properties.push(
                 { key: temp.first, value: temp.last}
