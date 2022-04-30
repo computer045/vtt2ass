@@ -15,6 +15,7 @@ class MainCommand < Thor
     method_option :title,       :aliases => '-t', :desc => 'Specify a title for you file. If the input is a directory, all files will share the same title.', :type => :string
     method_option :font_size,   :aliases => '-s', :desc => 'Specify a font size for the subtitles', :default => 52, :type => :numeric
     method_option :font_family, :aliases => '-f', :desc => 'Specify a font family for the subtitles', :default => 'Open Sans Semibold', :type => :string
+    method_option :css,         :aliases => '-c', :desc => 'Specify a CSS file path for Hidive subs', :type => :string
     method_option :quiet,       :aliases => '-q', :desc => 'Don\'t output to the console', :type => :boolean
     def convert(input)
         app = Application.new(input, options)

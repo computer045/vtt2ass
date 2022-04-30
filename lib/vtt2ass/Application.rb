@@ -20,7 +20,9 @@ class Application
             @title = options[:title]
         end
         @quiet = options[:quiet]
-        @noout = options[:noout]
+        if options[:css] then
+            @css = options[:css].gsub('\\', '/')
+        end
     end
 
     ##
@@ -55,7 +57,8 @@ class Application
         ass_file = ASSFile.new(
             (defined?(@title) ? @title : File.basename(file_path).gsub('.vtt', '')),
             @width,
-            @height
+            @height,
+            defined?(@css) ? @css : nil
         )
         ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size)
         return ass_file
