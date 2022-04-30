@@ -42,6 +42,7 @@ Options:
                                    # Default: 52
   -f, [--font-family=FONT_FAMILY]  # Specify a font family for the subtitles
                                    # Default: Open Sans Semibold
+  -c, [--css=CSS]                  # Specify a CSS file path for Hidive subs
   -q, [--quiet], [--no-quiet]      # Don't output to the console
 
 Run the VTT to ASS conversion for the specified file(s)
