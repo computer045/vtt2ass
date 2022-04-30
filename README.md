@@ -43,6 +43,8 @@ Options:
   -f, [--font-family=FONT_FAMILY]  # Specify a font family for the subtitles
                                    # Default: Open Sans Semibold
   -c, [--css=CSS]                  # Specify a CSS file path for Hidive subs
+  -l, [--line-offset=N]            # Specify a line offset for the main dialog (e.g. 50 lowers the text line by 50px of the total height)
+                                   # Default: 0
   -q, [--quiet], [--no-quiet]      # Don't output to the console
 
 Run the VTT to ASS conversion for the specified file(s)

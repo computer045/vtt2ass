@@ -15,7 +15,7 @@ class ASSStyle
     # * Requires +params+, a string of VTT styling as input.
     # * Requires a video +width+ as input.
     # * Requires a video +height+ as input. 
-    def initialize(style_name, params, font_family, font_size, font_color, is_bold, is_italic, width, height)
+    def initialize(style_name, params, font_family, font_size, font_color, is_bold, is_italic, line_offset, width, height)
         @width = width
         @height = height
         @font_family = font_family
@@ -25,6 +25,9 @@ class ASSStyle
         @s_params = ASSStyleParams.new(params, width, height)
         if style_name.eql? 'MainTop' then
             @s_params.vertical_margin = 50
+        end
+        if style_name.include? 'Subtitle' then
+            @s_params.vertical_margin -= line_offset
         end
         @is_italic = is_italic
         @is_bold = is_bold
