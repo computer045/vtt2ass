@@ -48,6 +48,8 @@ class ASSFile
     def convertVTTtoASS(vtt_file, font_family, font_size)
         fs = font_size
         font_color = '&H00FFFFFF'
+        is_italic = false
+        is_bold = false
         vtt_file.lines.each do |line|
             @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
             style_exists = false
@@ -74,11 +76,19 @@ class ASSFile
                                 font_size = (fs * em_size).to_i
                             when 'color'
                                 font_color = ASSStyle.convert_color(property[:value])
+                            when 'font-weight'
+                                if property[:value].eql? 'bold' then
+                                    is_bold = true
+                                end
+                            when 'font-style'
+                                if property[:value].eql? 'italic' then
+                                    is_italic = true
+                                end
                             end
                         end
                     end
                 end
-                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, @width, @height))
+                @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic, @width, @height))
             end
         end
     end
