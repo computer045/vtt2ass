@@ -1,5 +1,5 @@
 require 'css_parser'
-require_relative 'CSSRule'
+require_relative 'css_rule'
 
 class CSSFile
     attr_reader :rules

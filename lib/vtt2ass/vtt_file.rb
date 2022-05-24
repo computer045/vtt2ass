@@ -1,5 +1,5 @@
 # Relative imports
-require_relative 'VTTLine'
+require_relative 'vtt_line'
 
 ##
 # This class defines a VTT subtile file.

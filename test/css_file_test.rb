@@ -1,5 +1,4 @@
 require "test_helper"
-require_relative '../lib/vtt2ass/CSSFile'
 
 class CSSFileTest < Minitest::Test
     def setup

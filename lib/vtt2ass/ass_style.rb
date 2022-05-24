@@ -1,6 +1,6 @@
 # Relative imports
-require_relative 'ASSStyleParams'
-require_relative 'Validator'
+require_relative 'ass_style_params'
+require_relative 'validator'
 require 'redgreenblue'
 
 ##
