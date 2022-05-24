@@ -3,7 +3,7 @@ require 'thor'
 
 # Relative imports
 require_relative 'vtt2ass/version'
-require_relative 'vtt2ass/Application'
+require_relative 'vtt2ass/application'
 
 class MainCommand < Thor
     def self.exit_on_failure?

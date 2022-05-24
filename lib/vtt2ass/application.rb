@@ -1,6 +1,6 @@
 # Relative imports
-require_relative 'VTTFile'
-require_relative 'ASSFile'
+require_relative 'vtt_file'
+require_relative 'ass_file'
 
 ##
 # Main application class that manages all the operations.

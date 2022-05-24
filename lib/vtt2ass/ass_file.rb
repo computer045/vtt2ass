@@ -1,8 +1,8 @@
 # Relative imports
-require_relative 'ASSLine'
-require_relative 'ASSStyle'
-require_relative 'CSSFile'
-require_relative 'CSSRule'
+require_relative 'ass_line'
+require_relative 'ass_style'
+require_relative 'css_file'
+require_relative 'css_rule'
 
 ##
 # This class defines an ASS subtitle file.
