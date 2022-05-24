@@ -54,12 +54,14 @@ class Application
     # This method creates a new VTTFile object from the file path provided and convert its content
     # inside a new ASSFile object.
     def vtt_to_ass(file_path)
+        base_file_name = File.basename(file_path).gsub('.vtt', '')
+        css_file = defined?(@css) ? @css : (File.file?("#{file_path.gsub('.vtt', '')}.css") ? "#{file_path.gsub('.vtt', '')}.css" : nil)
         vtt_file = VTTFile.new(file_path, @width, @height)
         ass_file = ASSFile.new(
-            (defined?(@title) ? @title : File.basename(file_path).gsub('.vtt', '')),
+            (defined?(@title) ? @title : base_file_name),
             @width,
             @height,
-            defined?(@css) ? @css : nil
+            css_file
         )
         ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size, @line_offset)
         return ass_file
