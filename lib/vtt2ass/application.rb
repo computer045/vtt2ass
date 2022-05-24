@@ -21,7 +21,7 @@ class Application
         end
         @quiet = options[:quiet]
         if options[:css] then
-            @css = options[:css].gsub('\\', '/')
+            @css = options[:css].gsub('\\', '/').delete_suffix('/')
         end
         @line_offset = options[:line_offset]
     end
@@ -55,7 +55,14 @@ class Application
     # inside a new ASSFile object.
     def vtt_to_ass(file_path)
         base_file_name = File.basename(file_path).gsub('.vtt', '')
-        css_file = defined?(@css) ? @css : (File.file?("#{file_path.gsub('.vtt', '')}.css") ? "#{file_path.gsub('.vtt', '')}.css" : nil)
+        css_file = nil
+        if defined?(@css) and File.directory?(@css) then
+            css_file = "#{@css}/#{base_file_name}.css"
+        elsif File.file?("#{file_path.gsub('.vtt', '')}.css") then
+            css_file = "#{file_path.gsub('.vtt', '')}.css"
+        else
+            css_file = @css
+        end
         vtt_file = VTTFile.new(file_path, @width, @height)
         ass_file = ASSFile.new(
             (defined?(@title) ? @title : base_file_name),
