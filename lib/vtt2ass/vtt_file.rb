@@ -42,7 +42,7 @@ class VTTFile
 
     ##
     # This method writes the content of the VTTFile object into a file path that is provided.
-    def writeToFile(file_path)
+    def write_to_file(file_path)
         File.open(file_path, 'w') do |line|
             line.print "\ufeff"
             line.puts self.to_s
