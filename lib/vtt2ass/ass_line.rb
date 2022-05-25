@@ -14,9 +14,9 @@ class ASSLine
     # * Requires +text+, a VTT formatted string as input.
     def initialize(style, time_start, time_end, text)
         @style = style
-        @time_start = convertTime(time_start)
-        @time_end = convertTime(time_end)
-        @text = convertToAssText(text)
+        @time_start = convert_time(time_start)
+        @time_end = convert_time(time_end)
+        @text = convert_to_ass_text(text)
     end
 
     ##
@@ -29,7 +29,7 @@ class ASSLine
     # This method replaces characters and tags to ASS compatible characters and tags.
     #
     # * Requires +text+, a string of VTT formated text as input.  
-    def convertToAssText(text)
+    def convert_to_ass_text(text)
         decoder = HTMLEntities.new()
         text = text
             .gsub(/\r/, '')
@@ -52,16 +52,16 @@ class ASSLine
     # This method validates the time format and sends the matching time to be converted
     #
     # * Requires +str+, a VTT formatted time string.
-    def convertTime(time)
+    def convert_time(time)
         mTime = time.match(/([\d:]*)\.?(\d*)/)
-        return toSubsTime(mTime[0])
+        return to_subs_time(mTime[0])
     end
     
     ##
     # This method converts time from VTT format to the ASS format.
     #
     # * Requires +str+, a VTT formatted time string.
-    def toSubsTime(str)
+    def to_subs_time(str)
         n = []
         x = str.split(/[:.]/).map { |x| x.to_i }
         
@@ -72,12 +72,12 @@ class ASSLine
         sx = x[0]*60*60 + x[1]*60 + x[2] + x[3].to_f
         sx = ("%.2f" % sx).split('.')
     
-        n.unshift(padTimeNum('.', sx[1], msLen))
+        n.unshift(pad_time_num('.', sx[1], msLen))
         sx = sx[0].to_f
     
-        n.unshift(padTimeNum(':', (sx % 60).to_i, 2))
-        n.unshift(padTimeNum(':', (sx / 60).floor % 60, 2))
-        n.unshift(padTimeNum('',  (sx / 3600).floor % 60, hLen))
+        n.unshift(pad_time_num(':', (sx % 60).to_i, 2))
+        n.unshift(pad_time_num(':', (sx / 60).floor % 60, 2))
+        n.unshift(pad_time_num('',  (sx / 3600).floor % 60, hLen))
     
         return n.join('')
     end
@@ -88,7 +88,7 @@ class ASSLine
     # * Requires +sep+, a string separator.
     # * Requires +input+, an integer.
     # * Requires +pad+, an integer for the number of digits to be padded. 
-    def padTimeNum(sep, input, pad)
+    def pad_time_num(sep, input, pad)
         return sep + (input.to_s).rjust(pad, '0')
     end
 end

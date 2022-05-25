@@ -45,7 +45,7 @@ class Application
     def convert(input_path)
         ass_file = vtt_to_ass(input_path)
         if (not @output.nil?) then
-            ass_file.writeToFile(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass'))
+            ass_file.write_to_file(@output + '/' + File.basename(input_path).gsub('.vtt', '.ass'))
         end
         puts ass_file.to_s unless @quiet
     end
@@ -70,7 +70,7 @@ class Application
             @height,
             css_file
         )
-        ass_file.convertVTTtoASS(vtt_file, @font_family, @font_size, @line_offset)
+        ass_file.convert_vtt_to_ass(vtt_file, @font_family, @font_size, @line_offset)
         return ass_file
     end
 

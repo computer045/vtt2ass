@@ -45,7 +45,7 @@ class ASSFile
     # This method receives a VTTFile object and font arguments creates new ASSLine with the params of 
     # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
     # will be used in the ASS style list.
-    def convertVTTtoASS(vtt_file, font_family, font_size, line_offset = 0)
+    def convert_vtt_to_ass(vtt_file, font_family, font_size, line_offset = 0)
         fs = font_size
         vtt_file.lines.each do |line|
             font_color = '&H00FFFFFF'
@@ -95,7 +95,7 @@ class ASSFile
 
     ##
     # This method writes the content of the ASSFile object into a file path that is provided.
-    def writeToFile(file_path)
+    def write_to_file(file_path)
         File.open(file_path, 'w') do |line|
             line.print "\ufeff"
             line.puts self.to_s

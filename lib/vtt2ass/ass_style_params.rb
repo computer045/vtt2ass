@@ -19,15 +19,15 @@ class ASSStyleParams
                 @align = p[1].chomp
             end
         end
-        createAlignment()
-        createHorizontalMargin(width)
-        createVerticalMargin(height)
+        create_alignment()
+        create_horizontal_margin(width)
+        create_vertical_margin(height)
     end
 
     ##
     # This method decides the alignement value in a 9 position grid based of the
     # values in cue settings "align" and "line".
-    def createAlignment()
+    def create_alignment()
         if (defined?(@line) and not defined?(@position)) then
             if (defined?(@align)) then
                 case @align
@@ -60,7 +60,7 @@ class ASSStyleParams
     ##
     # This method calculates the horizontal margin in px between the alignement position and
     # and the content displayed by using the "position" cue setting.
-    def createHorizontalMargin(width)
+    def create_horizontal_margin(width)
         steps = (width / 100).to_i
         if defined?(@position) then
             @horizontal_margin = @position * steps
@@ -72,7 +72,7 @@ class ASSStyleParams
     ##
     # This method calculates the vertical margin in px between the alignement position and
     # and the content displayed by using the "line" cue setting.
-    def createVerticalMargin(height)
+    def create_vertical_margin(height)
         steps = (height / 100).to_i
         if defined?(@line) then
             if (@alignment == 1) then
