@@ -7,7 +7,7 @@ class ASSStyleTest < Minitest::Test
         vtt_file_path = "#{fixtures_path}Cute_Executive_Officer_Episode_1.Eng.vtt"
         vtt_file = VTTFile.new(vtt_file_path, 1920, 1080)
         @ass_file = ASSFile.new(File.basename(vtt_file_path).gsub('.vtt', ''), 1920, 1080)
-        @ass_file.convertVTTtoASS(vtt_file, 'Open Sans Semibold', 52)
+        @ass_file.convert_vtt_to_ass(vtt_file, 'Open Sans Semibold', 52)
     end
 
     def test_ass_style_color_name
