@@ -1,5 +1,4 @@
 class Validator
-
   def self.hex?(value)
     hex = true
     value.gsub!('#', '')
@@ -8,5 +7,4 @@ class Validator
     end
     return hex
   end
-
 end

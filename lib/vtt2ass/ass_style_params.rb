@@ -84,5 +84,4 @@ class ASSStyleParams
       @vertical_margin = 50
     end
   end
-
 end

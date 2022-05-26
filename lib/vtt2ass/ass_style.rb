@@ -14,7 +14,7 @@ class ASSStyle
   # * Requires +style_name+, a string name for the style as input.
   # * Requires +params+, a string of VTT styling as input.
   # * Requires a video +width+ as input.
-  # * Requires a video +height+ as input. 
+  # * Requires a video +height+ as input.
   def initialize(style_name, params, font_family, font_size, font_color, is_bold, is_italic, line_offset, width, height)
     @width = width
     @height = height
@@ -45,5 +45,4 @@ class ASSStyle
     color = Validator.hex?(color_value) ? RGB.hex(color_value) : RGB.css(color_value)
     return ("&H00%02x%02x%02x" % [color.b, color.g, color.r]).upcase
   end
-
 end

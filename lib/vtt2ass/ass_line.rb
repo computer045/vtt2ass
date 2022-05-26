@@ -4,7 +4,7 @@ require 'htmlentities'
 # This class defines an ASS subtile line.
 class ASSLine
   attr_reader :style, :time_start, :time_end, :text
-  
+
   ##
   # This method creates an instance of an ASSLine.
   #
@@ -28,23 +28,23 @@ class ASSLine
   ##
   # This method replaces characters and tags to ASS compatible characters and tags.
   #
-  # * Requires +text+, a string of VTT formated text as input.  
+  # * Requires +text+, a string of VTT formated text as input.
   def convert_to_ass_text(text)
     decoder = HTMLEntities.new()
     text = text
-      .gsub(/\r/, '')
-      .gsub(/\n/, '\\N')
-      .gsub(/\\n/, '\\N')
-      .gsub(/\\N +/, '\\N')
-      .gsub(/ +\\N/, '\\N')
-      .gsub(/(\\N)+/, '\\N')
-      .gsub(/<b[^>]*>([^<]*)<\/b>/) { |s| "{\\b1}#{$1}{\\b0}" }
-      .gsub(/<i[^>]*>([^<]*)<\/i>/) { |s| "{\\i1}#{$1}{\\i0}" }
-      .gsub(/<u[^>]*>([^<]*)<\/u>/) { |s| "{\\u1}#{$1}{\\u0}" }
-      .gsub(/<c[^>]*>([^<]*)<\/c>/) { |s| $1 }
-      .gsub(/<[^>]>/, '')
-      .gsub(/\\N$/, '')
-      .gsub(/ +$/, '')
+           .gsub(/\r/, '')
+           .gsub(/\n/, '\\N')
+           .gsub(/\\n/, '\\N')
+           .gsub(/\\N +/, '\\N')
+           .gsub(/ +\\N/, '\\N')
+           .gsub(/(\\N)+/, '\\N')
+           .gsub(/<b[^>]*>([^<]*)<\/b>/) { |s| "{\\b1}#{$1}{\\b0}" }
+           .gsub(/<i[^>]*>([^<]*)<\/i>/) { |s| "{\\i1}#{$1}{\\i0}" }
+           .gsub(/<u[^>]*>([^<]*)<\/u>/) { |s| "{\\u1}#{$1}{\\u0}" }
+           .gsub(/<c[^>]*>([^<]*)<\/c>/) { |s| $1 }
+           .gsub(/<[^>]>/, '')
+           .gsub(/\\N$/, '')
+           .gsub(/ +$/, '')
     return decoder.decode(text)
   end
 
@@ -56,7 +56,7 @@ class ASSLine
     mTime = time.match(/([\d:]*)\.?(\d*)/)
     return to_subs_time(mTime[0])
   end
-    
+
   ##
   # This method converts time from VTT format to the ASS format.
   #
@@ -64,12 +64,12 @@ class ASSLine
   def to_subs_time(str)
     n = []
     x = str.split(/[:.]/).map { |x| x.to_i }
-    
+
     msLen = 2
     hLen = 1
-    
+
     x[3] = '0.' + (x[3].to_s).rjust(3, '0')
-    sx = x[0]*60*60 + x[1]*60 + x[2] + x[3].to_f
+    sx = x[0] * 60 * 60 + x[1] * 60 + x[2] + x[3].to_f
     sx = ("%.2f" % sx).split('.')
 
     n.unshift(pad_time_num('.', sx[1], msLen))
@@ -81,15 +81,14 @@ class ASSLine
 
     return n.join('')
   end
-    
+
   ##
   # This method pads text so that time numbers are a fixed number of digit.
   #
   # * Requires +sep+, a string separator.
   # * Requires +input+, an integer.
-  # * Requires +pad+, an integer for the number of digits to be padded. 
+  # * Requires +pad+, an integer for the number of digits to be padded.
   def pad_time_num(sep, input, pad)
     return sep + (input.to_s).rjust(pad, '0')
   end
-
 end

@@ -7,7 +7,7 @@ class CSSRule
     declarations.split(/;\s?/).each do |dec|
       temp = dec.split(/:\s?/)
       @properties.push(
-        { key: temp.first, value: temp.last}
+        { key: temp.first, value: temp.last }
       )
     end
   end
@@ -17,7 +17,8 @@ class CSSRule
   end
 
   def reduce_selector(selector)
-    return selector.to_s.gsub(/\.rmp-container>\.rmp-content>\.rmp-cc-area>\.rmp-cc-container>\.rmp-cc-display>\.rmp-cc-cue\s?\.?/, '')
+    return selector.to_s.gsub(
+      /\.rmp-container>\.rmp-content>\.rmp-cc-area>\.rmp-cc-container>\.rmp-cc-display>\.rmp-cc-cue\s?\.?/, ''
+    )
   end
-
 end

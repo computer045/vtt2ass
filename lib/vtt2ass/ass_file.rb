@@ -42,7 +42,7 @@ class ASSFile
   end
 
   ##
-  # This method receives a VTTFile object and font arguments creates new ASSLine with the params of 
+  # This method receives a VTTFile object and font arguments creates new ASSLine with the params of
   # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
   # will be used in the ASS style list.
   def convert_vtt_to_ass(vtt_file, font_family, font_size, line_offset = 0)
@@ -69,7 +69,6 @@ class ASSFile
                 font_family = property[:value].gsub('"', '').split(' ,').last
               when 'font-size'
                 em_size = 1
-                #em_size = property[:value][0].eql? '.' ? "0#{property[:value]}" : property[:value]
                 if property[:value][0].eql? '.' then
                   em_size = "0#{property[:value]}".gsub('em', '').to_f
                 end
@@ -88,7 +87,8 @@ class ASSFile
             end
           end
         end
-        @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic, line_offset, @width, @height))
+        @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic,
+                                      line_offset, @width, @height))
       end
     end
   end
@@ -107,5 +107,4 @@ class ASSFile
   def to_s
     return @header + @ass_styles + @events + @ass_lines
   end
-
 end

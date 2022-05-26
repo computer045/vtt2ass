@@ -5,7 +5,6 @@ require_relative 'ass_file'
 ##
 # Main application class that manages all the operations.
 class Application
-
   ##
   # Creates a new Application instance.
   # It receives +options+ that can define the input and output directories.
@@ -75,5 +74,4 @@ class Application
     ass_file.convert_vtt_to_ass(vtt_file, @font_family, @font_size, @line_offset)
     return ass_file
   end
-
 end

@@ -41,5 +41,4 @@ class VTTLine
   def to_s
     return "#{@style} \n#{@time_start} --> #{@time_end} #{@params}\n#{@text}"
   end
-
 end

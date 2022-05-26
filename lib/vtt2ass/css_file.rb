@@ -3,6 +3,7 @@ require_relative 'css_rule'
 
 class CSSFile
   attr_reader :rules
+
   include CssParser
 
   def initialize(file_path)
@@ -32,5 +33,4 @@ class CSSFile
   def to_s
     return @file_path
   end
-
 end
