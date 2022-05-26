@@ -12,14 +12,14 @@ class ASSStyleTest < Minitest::Test
   end
 
   def test_ass_style_color_name
-    assert ASSStyle.convert_color('white') == '&H00FFFFFF'
+    assert ASSStyle.convert_color('white'.dup) == '&H00FFFFFF'
   end
 
   def test_ass_style_color_hex_short
-    assert ASSStyle.convert_color('#fff') == '&H00FFFFFF'
+    assert ASSStyle.convert_color('#fff'.dup) == '&H00FFFFFF'
   end
 
   def test_ass_style_color_hex_long
-    assert ASSStyle.convert_color('#ffffff') == '&H00FFFFFF'
+    assert ASSStyle.convert_color('#ffffff'.dup) == '&H00FFFFFF'
   end
 end

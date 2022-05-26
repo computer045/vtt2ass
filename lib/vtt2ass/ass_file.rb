@@ -17,27 +17,25 @@ class ASSFile
     @width = width
     @height = height
     @css_file = CSSFile.new(css_file_path) unless css_file_path.nil?
-    @header = [
-      '[Script Info]',
-      "Title: #{title}",
-      'ScriptType: v4.00+',
-      'Collisions: Normal',
-      'PlayDepth: 0',
-      "PlayResX: #{@width}",
-      "PlayResY: #{@height}",
-      'WrapStyle: 0',
-      'ScaledBorderAndShadow: yes',
-      '',
-      '[V4+ Styles]',
-      'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, '\
-      'Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, '\
-      'MarginR, MarginV, Encoding'
-    ]
-    @events = [
-      '',
-      '[Events]',
-      'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text'
-    ]
+    @header = <<~HEADER
+      [Script Info]
+      Title: #{title}
+      ScriptType: v4.00+
+      Collisions: Normal
+      PlayDepth: 0
+      PlayResX: #{@width}
+      PlayResY: #{@height}
+      WrapStyle: 0
+      ScaledBorderAndShadow: yes
+
+      [V4+ Styles]
+      Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+    HEADER
+    @events = <<~EVENTS
+
+      [Events]
+      Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+    EVENTS
     @ass_styles = []
     @ass_lines = []
   end
@@ -103,6 +101,6 @@ class ASSFile
   ##
   # This method concatenates the object data in the right order for a string output.
   def to_s
-    @header + @ass_styles + @events + @ass_lines
+    "#{@header}#{@ass_styles.join("\n")}#{@events}#{@ass_lines.join("\n")}"
   end
 end

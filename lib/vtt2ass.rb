@@ -37,6 +37,14 @@ class MainCommand < Thor
                               'text line by 50px of the total height)',
                               default: 0,
                               type: :numeric
+  method_option :width,       aliases: '-w',
+                              desc: 'Specify the video width',
+                              default: 1920,
+                              type: :numeric
+  method_option :height,      aliases: '-h',
+                              desc: 'Specify the video height',
+                              default: 1080,
+                              type: :numeric
   method_option :quiet,       aliases: '-q',
                               desc: 'Don\'t output to the console',
                               type: :boolean

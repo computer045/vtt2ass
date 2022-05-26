@@ -47,21 +47,19 @@ class ASSStyleParams
   ##
   # This method returns alignment when "line" value is specified but not "position"
   def find_alignment(align)
-    if defined?(align)
+    if !align.nil?
       case align
       when 'left', 'start'
-        alignment = @line >= 50 ? 1 : 7
+        @line >= 50 ? 1 : 7
       when 'right', 'end'
-        alignment = @line >= 50 ? 3 : 9
+        @line >= 50 ? 3 : 9
       when 'center', 'middle'
-        alignment = @line >= 50 ? 2 : 8
+        @line >= 50 ? 2 : 8
       end
     else
       # If position is higher than 50% align to bottom center, else align to top center
-      alignment = @line >= 50 ? 2 : 8
+      @line >= 50 ? 2 : 8
     end
-
-    alignment
   end
 
   ##

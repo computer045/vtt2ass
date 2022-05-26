@@ -10,16 +10,15 @@ class Application
   # Creates a new Application instance.
   # It receives +options+ that can define the input and output directories.
   def initialize(input, options)
-    @input = input ? input.gsub('\\', '/').delete_suffix('/') : '.'
-    @output = options[:output] ? options[:output].gsub('\\', '/').delete_suffix('/') : nil
-    @width = 1920
-    @height = 1080
-    @font_family = options[:font_family] || 'Open Sans Semibold'
-    @font_size = options[:font_size] || 52
-    @title = options[:title] if options[:title]
-    @quiet = options[:quiet]
-    @css = options[:css].gsub('\\', '/').delete_suffix('/') if options[:css]
-    @line_offset = options[:line_offset]
+    @options = options
+    @input = sanitize_path(input)
+  end
+
+  ##
+  # Replace backslashes from Windows paths to normal slashes.
+  # Deletes the trailing slash if there is one.
+  def sanitize_path(path)
+    path&.gsub('\\', '/')&.delete_suffix('/')
   end
 
   ##
@@ -43,9 +42,10 @@ class Application
   ##
   # This method launches the conversion process on the specified input file.
   def convert(input_path)
+    output = sanitize_path(@options[:output])
     ass_file = vtt_to_ass(input_path)
-    ass_file.write_to_file("#{@output}/#{File.basename(input_path).gsub('.vtt', '.ass')}") unless @output.nil?
-    puts ass_file.to_s unless @quiet
+    ass_file.write_to_file("#{output}/#{File.basename(input_path).gsub('.vtt', '.ass')}") unless output.nil?
+    puts ass_file.to_s unless @options[:quiet]
   end
 
   ##
@@ -53,21 +53,22 @@ class Application
   # inside a new ASSFile object.
   def vtt_to_ass(file_path)
     base_file_name = File.basename(file_path).gsub('.vtt', '')
-    css_file = if defined?(@css) && File.directory?(@css)
-                 "#{@css}/#{base_file_name}.css"
-               elsif File.file?("#{file_path.gsub('.vtt', '')}.css")
-                 "#{file_path.gsub('.vtt', '')}.css"
-               else
-                 @css
-               end
-    vtt_file = VTTFile.new(file_path, @width, @height)
+    css_file =
+      if !@options[:css].nil? && File.directory?(@options[:css])
+        "#{sanitize_path(@options[:css])}/#{base_file_name}.css"
+      elsif File.file?("#{file_path.gsub('.vtt', '')}.css")
+        "#{file_path.gsub('.vtt', '')}.css"
+      else
+        @options[:css]
+      end
+    vtt_file = VTTFile.new(file_path, @options[:width], @options[:height])
     ass_file = ASSFile.new(
-      (defined?(@title) ? @title : base_file_name),
-      @width,
-      @height,
+      (!@options[:title].nil? ? @options[:title] : base_file_name),
+      @options[:width],
+      @options[:height],
       css_file
     )
-    ass_file.convert_vtt_to_ass(vtt_file, @font_family, @font_size, @line_offset)
+    ass_file.convert_vtt_to_ass(vtt_file, @options[:font_family], @options[:font_size], @options[:line_offset])
     ass_file
   end
 end
