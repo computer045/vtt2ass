@@ -10,6 +10,13 @@ class ASSStyleParams
   # It takes VTT style arguments and assign them to their respectful instance variable.
   # It calls methods to create ASS values from the VTT cue settings.
   def initialize(params, width, height)
+    split_params(params)
+    create_alignment
+    create_horizontal_margin(width)
+    create_vertical_margin(height)
+  end
+
+  def split_params(params)
     (params.split(' ').map { |p| p.split(':') }).each do |p|
       case p[0]
       when 'position'
@@ -21,41 +28,54 @@ class ASSStyleParams
         @align = p[1].chomp
       end
     end
-    create_alignment
-    create_horizontal_margin(width)
-    create_vertical_margin(height)
   end
 
   ##
   # This method decides the alignement value in a 9 position grid based of the
   # values in cue settings "align" and "line".
   def create_alignment
-    if defined?(@line) && !defined?(@position)
-      if defined?(@align)
-        case @align
-        when 'left', 'start'
-          @alignment = @line >= 50 ? 1 : 7
-        when 'right', 'end'
-          @alignment = @line >= 50 ? 3 : 9
-        when 'center', 'middle'
-          @alignment = @line >= 50 ? 2 : 8
-        end
+    @alignment =
+      if defined?(@line) && !defined?(@position)
+        find_alignment(@align)
+      elsif defined?(@line) && defined?(@position)
+        1 # bottom left
       else
-        @alignment = @line >= 50 ? 2 : 8 # If position is higher than 50% align to bottom center, else align to top center
+        find_default_alignment(@align)
       end
-    elsif defined?(@line) && defined?(@position)
-      @alignment = 1
+  end
+
+  ##
+  # This method returns alignment when "line" value is specified but not "position"
+  def find_alignment(align)
+    if defined?(align)
+      case align
+      when 'left', 'start'
+        alignment = @line >= 50 ? 1 : 7
+      when 'right', 'end'
+        alignment = @line >= 50 ? 3 : 9
+      when 'center', 'middle'
+        alignment = @line >= 50 ? 2 : 8
+      end
     else
-      @alignment = case @align
-                   when 'left', 'start'
-                     1
-                   when 'right', 'end'
-                     3
-                   when 'center', 'middle'
-                     2
-                   else
-                     2
-                   end
+      # If position is higher than 50% align to bottom center, else align to top center
+      alignment = @line >= 50 ? 2 : 8
+    end
+
+    alignment
+  end
+
+  ##
+  # This method returns alignment when "line" and "position" values are not specified
+  def find_default_alignment(align)
+    case align
+    when 'left', 'start'
+      1
+    when 'right', 'end'
+      3
+    when 'center', 'middle'
+      2
+    else
+      2
     end
   end
 
@@ -64,11 +84,12 @@ class ASSStyleParams
   # and the content displayed by using the "position" cue setting.
   def create_horizontal_margin(width)
     steps = (width / 100).to_i
-    @horizontal_margin = if defined?(@position)
-                           @position * steps
-                         else
-                           0
-                         end
+    @horizontal_margin =
+      if defined?(@position)
+        @position * steps
+      else
+        0
+      end
   end
 
   ##
@@ -76,14 +97,15 @@ class ASSStyleParams
   # and the content displayed by using the "line" cue setting.
   def create_vertical_margin(height)
     steps = (height / 100).to_i
-    @vertical_margin = if defined?(@line)
-                         if @alignment == 1
-                           (100 - @line) * steps
-                         else
-                           @line >= 50 ? (100 - @line) * steps : @line * steps
-                         end
-                       else
-                         50
-                       end
+    @vertical_margin =
+      if defined?(@line)
+        if @alignment == 1
+          (100 - @line) * steps
+        else
+          @line >= 50 ? (100 - @line) * steps : @line * steps
+        end
+      else
+        50
+      end
   end
 end

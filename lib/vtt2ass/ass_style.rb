@@ -33,10 +33,16 @@ class ASSStyle
   ##
   # This method assigns the object values to an ASS style line and outputs it.
   def to_s
-    # Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-    "Style: #{@style_name},#{@font_family},#{@font_size},#{@font_color},&H000000FF,&H00020713,&H00000000,#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
+    # Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour,
+    # Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment,
+    # MarginL, MarginR, MarginV, Encoding
+    "Style: #{@style_name},#{@font_family},#{@font_size},#{@font_color},&H000000FF,&H00020713,&H00000000,"\
+    "#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},"\
+    "#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
   end
 
+  ##
+  # This method returns a ASS formated color value based on hex or color name value
   def self.convert_color(color_value)
     color_value.gsub!('#', '')
     color = Validator.hex?(color_value) ? RGB.hex(color_value) : RGB.css(color_value)

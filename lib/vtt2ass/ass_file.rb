@@ -29,7 +29,9 @@ class ASSFile
       'ScaledBorderAndShadow: yes',
       '',
       '[V4+ Styles]',
-      'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding'
+      'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, '\
+      'Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, '\
+      'MarginR, MarginV, Encoding'
     ]
     @events = [
       '',
@@ -79,8 +81,13 @@ class ASSFile
           end
         end
       end
-      @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic,
-                                    line_offset, @width, @height))
+      @ass_styles.push(
+        ASSStyle.new(
+          line.style, line.params,
+          font_family, font_size, font_color, is_bold, is_italic,
+          line_offset, @width, @height
+        )
+      )
     end
   end
 

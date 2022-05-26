@@ -33,20 +33,21 @@ class ASSLine
   # * Requires +text+, a string of VTT formated text as input.
   def convert_to_ass_text(text)
     decoder = HTMLEntities.new
-    text = text
-           .gsub(/\r/, '')
-           .gsub(/\n/, '\\N')
-           .gsub(/\\n/, '\\N')
-           .gsub(/\\N +/, '\\N')
-           .gsub(/ +\\N/, '\\N')
-           .gsub(/(\\N)+/, '\\N')
-           .gsub(%r{<b[^>]*>([^<]*)</b>}) { |_s| "{\\b1}#{Regexp.last_match(1)}{\\b0}" }
-           .gsub(%r{<i[^>]*>([^<]*)</i>}) { |_s| "{\\i1}#{Regexp.last_match(1)}{\\i0}" }
-           .gsub(%r{<u[^>]*>([^<]*)</u>}) { |_s| "{\\u1}#{Regexp.last_match(1)}{\\u0}" }
-           .gsub(%r{<c[^>]*>([^<]*)</c>}) { |_s| Regexp.last_match(1) }
-           .gsub(/<[^>]>/, '')
-           .gsub(/\\N$/, '')
-           .gsub(/ +$/, '')
+    text =
+      text
+      .gsub(/\r/, '')
+      .gsub(/\n/, '\\N')
+      .gsub(/\\n/, '\\N')
+      .gsub(/\\N +/, '\\N')
+      .gsub(/ +\\N/, '\\N')
+      .gsub(/(\\N)+/, '\\N')
+      .gsub(%r{<b[^>]*>([^<]*)</b>}) { |_s| "{\\b1}#{Regexp.last_match(1)}{\\b0}" }
+      .gsub(%r{<i[^>]*>([^<]*)</i>}) { |_s| "{\\i1}#{Regexp.last_match(1)}{\\i0}" }
+      .gsub(%r{<u[^>]*>([^<]*)</u>}) { |_s| "{\\u1}#{Regexp.last_match(1)}{\\u0}" }
+      .gsub(%r{<c[^>]*>([^<]*)</c>}) { |_s| Regexp.last_match(1) }
+      .gsub(/<[^>]>/, '')
+      .gsub(/\\N$/, '')
+      .gsub(/ +$/, '')
     decoder.decode(text)
   end
 
