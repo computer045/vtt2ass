@@ -1,44 +1,45 @@
 ##
 # This class defines a VTT subtile line.
 class VTTLine
-    attr_accessor :style
-    attr_reader :time_start, :time_end, :params, :text
+  attr_accessor :style
+  attr_reader :time_start, :time_end, :params, :text
 
-    ##
-    # This method creates an instance of an VTTLine.
-    #
-    # * Requires +paragraph+, a VTT formatted string as input.
-    def initialize(paragraph, width, height)
-        lines = paragraph.split("\n")
-        rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
-        @style = "Main"
-        @text, @time_start, @time_end, @params = ""
-        count = 0
+  ##
+  # This method creates an instance of an VTTLine.
+  #
+  # * Requires +paragraph+, a VTT formatted string as input.
+  def initialize(paragraph, width, height)
+    lines = paragraph.split("\n")
+    rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
+    @style = "Main"
+    @text, @time_start, @time_end, @params = ""
+    count = 0
 
-        lines.each do |line|
-            m = line.match(rx)
-            if not m and count == 0 then
-                @style = line
-            elsif m then
-                @time_start = m[1]
-                @time_end = m[2]
-                @params = m[3]
-                ass_style = ASSStyleParams.new(@params, width, height)
-                if @style.eql? 'Main' and ass_style.alignment == 8 then
-                    @style = 'MainTop'
-                end
-            else
-                @text += line + "\n"
-            end
-            count += 1;
+    lines.each do |line|
+      m = line.match(rx)
+      if not m and count == 0 then
+        @style = line
+      elsif m then
+        @time_start = m[1]
+        @time_end = m[2]
+        @params = m[3]
+        ass_style = ASSStyleParams.new(@params, width, height)
+        if @style.eql? 'Main' and ass_style.alignment == 8 then
+          @style = 'MainTop'
         end
-
-        @text = @text.lstrip
+      else
+        @text += line + "\n"
+      end
+      count += 1;
     end
 
-    ##
-    # This method assigns the object values and outputs a VTT dialogue line.
-    def to_s
-        return "#{@style} \n#{@time_start} --> #{@time_end} #{@params}\n#{@text}"
-    end
+    @text = @text.lstrip
+  end
+
+  ##
+  # This method assigns the object values and outputs a VTT dialogue line.
+  def to_s
+    return "#{@style} \n#{@time_start} --> #{@time_end} #{@params}\n#{@text}"
+  end
+
 end
