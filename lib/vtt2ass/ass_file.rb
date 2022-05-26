@@ -1,4 +1,5 @@
-# Relative imports
+# frozen_string_literal: true
+
 require_relative 'ass_line'
 require_relative 'ass_style'
 require_relative 'css_file'
@@ -15,9 +16,7 @@ class ASSFile
   def initialize(title, width, height, css_file_path = nil)
     @width = width
     @height = height
-    if not css_file_path.nil? then
-      @css_file = CSSFile.new(css_file_path)
-    end
+    @css_file = CSSFile.new(css_file_path) unless css_file_path.nil?
     @header = [
       '[Script Info]',
       "Title: #{title}",
@@ -54,42 +53,34 @@ class ASSFile
       @ass_lines.push(ASSLine.new(line.style, line.time_start, line.time_end, line.text))
       style_exists = false
       @ass_styles.each do |style|
-        if (style.style_name.eql? line.style) then
+        if style.style_name.eql? line.style
           style_exists = true
           break
         end
       end
-      if not style_exists then
-        if defined?(@css_file) then
-          css_rule = @css_file.find_rule(line.style)
-          if not css_rule.nil? then
-            css_rule.properties.each do |property|
-              case property[:key]
-              when 'font-family'
-                font_family = property[:value].gsub('"', '').split(' ,').last
-              when 'font-size'
-                em_size = 1
-                if property[:value][0].eql? '.' then
-                  em_size = "0#{property[:value]}".gsub('em', '').to_f
-                end
-                font_size = (fs * em_size).to_i
-              when 'color'
-                font_color = ASSStyle.convert_color(property[:value])
-              when 'font-weight'
-                if property[:value].eql? 'bold' then
-                  is_bold = true
-                end
-              when 'font-style'
-                if property[:value].eql? 'italic' then
-                  is_italic = true
-                end
-              end
-            end
+      next if style_exists
+
+      if defined?(@css_file)
+        css_rule = @css_file.find_rule(line.style)
+        css_rule&.properties&.each do |property|
+          case property[:key]
+          when 'font-family'
+            font_family = property[:value].gsub('"', '').split(' ,').last
+          when 'font-size'
+            em_size = 1
+            em_size = "0#{property[:value]}".gsub('em', '').to_f if property[:value][0].eql? '.'
+            font_size = (fs * em_size).to_i
+          when 'color'
+            font_color = ASSStyle.convert_color(property[:value])
+          when 'font-weight'
+            is_bold = true if property[:value].eql? 'bold'
+          when 'font-style'
+            is_italic = true if property[:value].eql? 'italic'
           end
         end
-        @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic,
-                                      line_offset, @width, @height))
       end
+      @ass_styles.push(ASSStyle.new(line.style, line.params, font_family, font_size, font_color, is_bold, is_italic,
+                                    line_offset, @width, @height))
     end
   end
 
@@ -98,13 +89,13 @@ class ASSFile
   def write_to_file(file_path)
     File.open(file_path, 'w') do |line|
       line.print "\ufeff"
-      line.puts self.to_s
+      line.puts to_s
     end
   end
 
   ##
   # This method concatenates the object data in the right order for a string output.
   def to_s
-    return @header + @ass_styles + @events + @ass_lines
+    @header + @ass_styles + @events + @ass_lines
   end
 end

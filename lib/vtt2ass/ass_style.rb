@@ -1,4 +1,5 @@
-# Relative imports
+# frozen_string_literal: true
+
 require_relative 'ass_style_params'
 require_relative 'validator'
 require 'redgreenblue'
@@ -23,12 +24,8 @@ class ASSStyle
     @font_color = font_color
     @style_name = style_name
     @s_params = ASSStyleParams.new(params, width, height)
-    if style_name.eql? 'MainTop' then
-      @s_params.vertical_margin = 50
-    end
-    if style_name.include? 'Subtitle' then
-      @s_params.vertical_margin -= line_offset
-    end
+    @s_params.vertical_margin = 50 if style_name.eql? 'MainTop'
+    @s_params.vertical_margin -= line_offset if style_name.include? 'Subtitle'
     @is_italic = is_italic
     @is_bold = is_bold
   end
@@ -37,12 +34,12 @@ class ASSStyle
   # This method assigns the object values to an ASS style line and outputs it.
   def to_s
     # Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-    return "Style: #{@style_name},#{@font_family},#{@font_size},#{@font_color},&H000000FF,&H00020713,&H00000000,#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
+    "Style: #{@style_name},#{@font_family},#{@font_size},#{@font_color},&H000000FF,&H00020713,&H00000000,#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
   end
 
   def self.convert_color(color_value)
     color_value.gsub!('#', '')
     color = Validator.hex?(color_value) ? RGB.hex(color_value) : RGB.css(color_value)
-    return ("&H00%02x%02x%02x" % [color.b, color.g, color.r]).upcase
+    format('&H00%<blue>02x%<green>02x%<red>02x', blue: color.b, green: color.g, red: color.r).upcase
   end
 end

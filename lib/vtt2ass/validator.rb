@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Validator
   def self.hex?(value)
     hex = true
@@ -5,6 +7,6 @@ class Validator
     value.chars.each do |digit|
       hex = false unless digit.match(/\h/)
     end
-    return hex
+    hex
   end
 end

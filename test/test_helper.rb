@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "vtt2ass"
+# frozen_string_literal: true
 
-require "minitest/autorun"
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+require 'vtt2ass'
+
+require 'minitest/autorun'

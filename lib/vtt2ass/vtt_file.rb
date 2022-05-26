@@ -1,4 +1,5 @@
-# Relative imports
+# frozen_string_literal: true
+
 require_relative 'vtt_line'
 
 ##
@@ -16,12 +17,12 @@ class VTTFile
     style_count = 1
     File.foreach(file_path, separator) do |paragraph|
       paragraph = paragraph.rstrip.gsub(/[\r\n]/, "\n")
-      if not paragraph.eql? "" then
+      unless paragraph.eql? ''
         vtt_line = VTTLine.new(paragraph, width, height)
-        if vtt_line.style.eql? 'Main' and
-           not vtt_line.params.to_s.empty? and
-           (not vtt_line.params.to_s.eql? 'align:middle' and
-           not vtt_line.params.to_s.eql? 'align:center') then
+        if vtt_line.style.eql?('Main') &&
+           !vtt_line.params.to_s.empty? &&
+           (!vtt_line.params.to_s.eql?('align:middle') &&
+           !vtt_line.params.to_s.eql?('align:center'))
           vtt_line.style = "Style#{style_count}"
           style_count += 1
         end
@@ -45,13 +46,13 @@ class VTTFile
   def write_to_file(file_path)
     File.open(file_path, 'w') do |line|
       line.print "\ufeff"
-      line.puts self.to_s
+      line.puts to_s
     end
   end
 
   ##
   # This method concatenates the object data in the right order for a string output.
   def to_s
-    return "WEBVTT\n\n\n" + @lines
+    "WEBVTT\n\n\n#{@lines}"
   end
 end

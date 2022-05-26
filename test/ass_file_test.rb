@@ -1,8 +1,10 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class ASSFileTest < Minitest::Test
   def setup
-    file_path = __dir__ + '/fixtures/example.vtt'
+    file_path = "#{__dir__}/fixtures/example.vtt"
     vtt_file = VTTFile.new(file_path, 1920, 1080)
     @ass_file = ASSFile.new(File.basename(file_path).gsub('.vtt', ''), 1920, 1080)
     @ass_file.convert_vtt_to_ass(vtt_file, 'Open Sans Semibold', 52)

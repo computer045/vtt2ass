@@ -1,4 +1,6 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class CSSFileTest < Minitest::Test
   def setup
@@ -11,7 +13,7 @@ class CSSFileTest < Minitest::Test
     refute_nil @css_file
   end
 
-  def test_instance_of_CSSFile
+  def test_instance_of_css_file
     assert_instance_of CSSFile, @css_file
   end
 end

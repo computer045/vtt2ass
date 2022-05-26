@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CSSRule
   attr_reader :name, :properties
 
@@ -13,11 +15,11 @@ class CSSRule
   end
 
   def to_s
-    return "#{@name} #{@properties}"
+    "#{@name} #{@properties}"
   end
 
   def reduce_selector(selector)
-    return selector.to_s.gsub(
+    selector.to_s.gsub(
       /\.rmp-container>\.rmp-content>\.rmp-cc-area>\.rmp-cc-container>\.rmp-cc-display>\.rmp-cc-cue\s?\.?/, ''
     )
   end

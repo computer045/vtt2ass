@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # This class defines a VTT subtile line.
 class VTTLine
@@ -11,26 +13,24 @@ class VTTLine
   def initialize(paragraph, width, height)
     lines = paragraph.split("\n")
     rx = /^([\d:.]*) --> ([\d:.]*)\s?(.*?)\s*$/
-    @style = "Main"
-    @text, @time_start, @time_end, @params = ""
+    @style = 'Main'
+    @text, @time_start, @time_end, @params = ''
     count = 0
 
     lines.each do |line|
       m = line.match(rx)
-      if not m and count == 0 then
+      if !m && count.zero?
         @style = line
-      elsif m then
+      elsif m
         @time_start = m[1]
         @time_end = m[2]
         @params = m[3]
         ass_style = ASSStyleParams.new(@params, width, height)
-        if @style.eql? 'Main' and ass_style.alignment == 8 then
-          @style = 'MainTop'
-        end
+        @style = 'MainTop' if @style.eql?('Main') && ass_style.alignment == 8
       else
-        @text += line + "\n"
+        @text += "#{line}\n"
       end
-      count += 1;
+      count += 1
     end
 
     @text = @text.lstrip
@@ -39,6 +39,6 @@ class VTTLine
   ##
   # This method assigns the object values and outputs a VTT dialogue line.
   def to_s
-    return "#{@style} \n#{@time_start} --> #{@time_end} #{@params}\n#{@text}"
+    "#{@style} \n#{@time_start} --> #{@time_end} #{@params}\n#{@text}"
   end
 end
