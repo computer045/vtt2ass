@@ -5,6 +5,8 @@ require 'thor'
 require_relative 'vtt2ass/version'
 require_relative 'vtt2ass/application'
 
+##
+# This is the main command line Class that manages the provided CLI arguments.
 class MainCommand < Thor
   def self.exit_on_failure?
     true

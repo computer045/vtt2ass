@@ -40,6 +40,8 @@ class Application
     puts 'The application stopped unexpectedly. The conversion may not have been completed.'
   end
 
+  ##
+  # This method launches the conversion process on the specified input file.
   def convert(input_path)
     ass_file = vtt_to_ass(input_path)
     ass_file.write_to_file("#{@output}/#{File.basename(input_path).gsub('.vtt', '.ass')}") unless @output.nil?

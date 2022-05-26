@@ -3,6 +3,8 @@
 require 'css_parser'
 require_relative 'css_rule'
 
+##
+# This class defines a CSS file for subtitles.
 class CSSFile
   attr_reader :rules
 
