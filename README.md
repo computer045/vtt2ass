@@ -103,7 +103,7 @@ $ gem build vtt2ass.gemspec
 
 To install the gem file:
 ```bash
-$ gem install ./vtt2ass-0.3.3.gem
+$ gem install ./vtt2ass-0.3.5.gem
 ```
 
 ## License

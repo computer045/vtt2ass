@@ -6,5 +6,5 @@ module Vtt2ass
   ##
   # This is the version of the application.
   # This needs to be changed for each gem release.
-  VERSION = '0.3.4'
+  VERSION = '0.3.5'
 end
