@@ -1,7 +1,19 @@
 ---
 AllCops:
   TargetRubyVersion: 2.7.2
+  NewCops: enable
+# Set method line number to 25
 Metrics/MethodLength:
-  Max: 20
+  Max: 25
+# Set parameter number to 10
 Metrics/ParameterLists:
   Max: 10
+# Disable checking of ABC metrics (assignment, branch, condition)
+Metrics/AbcSize:
+  Enabled: false
+# Disable method perceived complexity (how it is hard to read a method)
+Metrics/PerceivedComplexity:
+  Enabled: false
+# Disable cyclomatic complexity which is a number of paths through a method
+Metrics/CyclomaticComplexity:
+  Enabled: false

@@ -72,7 +72,7 @@ class ASSLine
     h_len = 1
 
     x[3] = "0.#{x[3].to_s.rjust(3, '0')}"
-    sx = x[0] * 60 * 60 + x[1] * 60 + x[2] + x[3].to_f
+    sx = (x[0] * 60 * 60) + (x[1] * 60) + x[2] + x[3].to_f
     sx = format('%.2f', sx).split('.')
 
     n.unshift(pad_time_num('.', sx[1], ms_len))
@@ -82,7 +82,7 @@ class ASSLine
     n.unshift(pad_time_num(':', (sx / 60).floor % 60, 2))
     n.unshift(pad_time_num('',  (sx / 3600).floor % 60, h_len))
 
-    n.join('')
+    n.join
   end
 
   ##

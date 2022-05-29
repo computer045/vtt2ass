@@ -17,7 +17,7 @@ class ASSStyleParams
   end
 
   def split_params(params)
-    (params.split(' ').map { |p| p.split(':') }).each do |p|
+    (params.split.map { |p| p.split(':') }).each do |p|
       case p[0]
       when 'position'
         @position = p[1].gsub(/%/, '').to_i
@@ -47,7 +47,10 @@ class ASSStyleParams
   ##
   # This method returns alignment when "line" value is specified but not "position"
   def find_alignment(align)
-    if !align.nil?
+    if align.nil?
+      # If position is higher than 50% align to bottom center, else align to top center
+      @line >= 50 ? 2 : 8
+    else
       case align
       when 'left', 'start'
         @line >= 50 ? 1 : 7
@@ -56,9 +59,6 @@ class ASSStyleParams
       when 'center', 'middle'
         @line >= 50 ? 2 : 8
       end
-    else
-      # If position is higher than 50% align to bottom center, else align to top center
-      @line >= 50 ? 2 : 8
     end
   end
 
@@ -70,8 +70,7 @@ class ASSStyleParams
       1
     when 'right', 'end'
       3
-    when 'center', 'middle'
-      2
+    # when 'center', 'middle'
     else
       2
     end

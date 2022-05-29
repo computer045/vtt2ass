@@ -63,7 +63,7 @@ class Application
       end
     vtt_file = VTTFile.new(file_path, @options[:width], @options[:height])
     ass_file = ASSFile.new(
-      (!@options[:title].nil? ? @options[:title] : base_file_name),
+      (@options[:title].nil? ? base_file_name : @options[:title]),
       @options[:width],
       @options[:height],
       css_file

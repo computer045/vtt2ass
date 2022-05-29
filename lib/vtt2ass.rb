@@ -19,7 +19,7 @@ class MainCommand < Thor
                               type: :string
   method_option :title,       aliases: '-t',
                               desc: 'Specify a title for you file. If the input is a directory, '\
-                              'all files will share the same title.',
+                                    'all files will share the same title.',
                               type: :string
   method_option :font_size,   aliases: '-s',
                               desc: 'Specify a font size for the subtitles',
@@ -34,7 +34,7 @@ class MainCommand < Thor
                               type: :string
   method_option :line_offset, aliases: '-l',
                               desc: 'Specify a line offset for the main dialog (e.g. 50 lowers the '\
-                              'text line by 50px of the total height)',
+                                    'text line by 50px of the total height)',
                               default: 0,
                               type: :numeric
   method_option :width,       aliases: '-w',

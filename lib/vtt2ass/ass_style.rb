@@ -37,8 +37,8 @@ class ASSStyle
     # Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment,
     # MarginL, MarginR, MarginV, Encoding
     "Style: #{@style_name},#{@font_family},#{@font_size},#{@font_color},&H000000FF,&H00020713,&H00000000,"\
-    "#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},"\
-    "#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
+      "#{@is_bold ? '-1' : '0'},#{@is_italic ? '-1' : '0'},0,0,100,100,0,0,1,2.0,2.0,#{@s_params.alignment},"\
+      "#{@s_params.horizontal_margin},0,#{@s_params.vertical_margin},1"
   end
 
   ##
