@@ -33,25 +33,23 @@ class Application
     elsif File.file?(@input)
       convert(@input)
     else
-      raise StandardError.new('ERROR: Input file or directory does not exist.')
+      raise StandardError, 'ERROR: Input file or directory does not exist.'
     end
   rescue SystemExit, Interrupt
     puts 'ERROR: The application stopped unexpectedly. The conversion may not have been completed.'
-  rescue => error
-    puts error.message
+  rescue StandardError => e
+    puts e.message
   end
 
   ##
   # This method launches the conversion process on the specified input file.
   def convert(input_path)
     output = sanitize_path(@options[:output])
-    if File.directory?(output)
-      ass_file = vtt_to_ass(input_path)
-      ass_file.write_to_file("#{output}/#{File.basename(input_path).gsub('.vtt', '.ass')}") unless output.nil?
-      puts ass_file.to_s unless @options[:quiet]
-    else
-      raise StandardError.new('ERROR: Output directory does not exist.')
-    end
+    raise StandardError, 'ERROR: Output directory does not exist.' unless File.directory?(output)
+
+    ass_file = vtt_to_ass(input_path)
+    ass_file.write_to_file("#{output}/#{File.basename(input_path).gsub('.vtt', '.ass')}") unless output.nil?
+    puts ass_file.to_s unless @options[:quiet]
   end
 
   ##
