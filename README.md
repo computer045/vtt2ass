@@ -64,6 +64,10 @@ Options:
   -c, [--css=CSS]                  # Specify a CSS file path for Hidive subs
   -l, [--line-offset=N]            # Specify a line offset for the main dialog (e.g. 50 lowers the text line by 50px of the total height)
                                    # Default: 0
+  -w, [--width=N]                  # Specify the video width
+                                   # Default: 1920
+  -h, [--height=N]                 # Specify the video height
+                                   # Default: 1080
   -q, [--quiet], [--no-quiet]      # Don't output to the console
 
 Run the VTT to ASS conversion for the specified file(s)
@@ -99,7 +103,7 @@ $ gem build vtt2ass.gemspec
 
 To install the gem file:
 ```bash
-$ gem install ./vtt2ass-0.3.3.gem
+$ gem install ./vtt2ass-0.3.5.gem
 ```
 
 ## License
