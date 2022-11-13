@@ -10,6 +10,7 @@ class ASSStyleParams
   # It takes VTT style arguments and assign them to their respectful instance variable.
   # It calls methods to create ASS values from the VTT cue settings.
   def initialize(params, width, height)
+    @align = nil
     split_params(params)
     create_alignment
     create_horizontal_margin(width)
