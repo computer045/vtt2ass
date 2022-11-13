@@ -74,7 +74,8 @@ class Application
       @options[:height],
       css_file
     )
-    ass_file.convert_vtt_to_ass(vtt_file, @options[:font_family], @options[:font_size], { line: @options[:line_offset], caption: @options[:caption_offset]})
+    ass_file.convert_vtt_to_ass(vtt_file, @options[:font_family], @options[:font_size],
+                                { line: @options[:line_offset], caption: @options[:caption_offset] })
     ass_file
   end
 end
