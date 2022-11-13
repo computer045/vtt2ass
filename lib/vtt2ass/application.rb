@@ -39,12 +39,14 @@ class Application
     puts 'ERROR: The application stopped unexpectedly. The conversion may not have been completed.'
   rescue StandardError => e
     puts e.message
+    puts e.backtrace
   end
 
   ##
   # This method launches the conversion process on the specified input file.
   def convert(input_path)
     output = sanitize_path(@options[:output])
+    output = '.' if output.nil?
     raise StandardError, 'ERROR: Output directory does not exist.' unless File.directory?(output)
 
     ass_file = vtt_to_ass(input_path)
@@ -72,7 +74,7 @@ class Application
       @options[:height],
       css_file
     )
-    ass_file.convert_vtt_to_ass(vtt_file, @options[:font_family], @options[:font_size], @options[:line_offset])
+    ass_file.convert_vtt_to_ass(vtt_file, @options[:font_family], @options[:font_size], { line: @options[:line_offset], caption: @options[:caption_offset]})
     ass_file
   end
 end

@@ -44,7 +44,7 @@ class ASSFile
   # This method receives a VTTFile object and font arguments creates new ASSLine with the params of
   # each VTTLine. All those ASSLine are stored in an array. It also creates an array of ASSStyle that
   # will be used in the ASS style list.
-  def convert_vtt_to_ass(vtt_file, font_family, font_size, line_offset = 0) # rubocop:disable Metrics/MethodLength
+  def convert_vtt_to_ass(vtt_file, font_family, font_size, offset) # rubocop:disable Metrics/MethodLength
     fs = font_size
     vtt_file.lines.each do |line| # rubocop:disable Metrics/BlockLength
       font_color = '&H00FFFFFF'
@@ -83,7 +83,7 @@ class ASSFile
         ASSStyle.new(
           line.style, line.params,
           font_family, font_size, font_color, is_bold, is_italic,
-          line_offset, @width, @height
+          offset, @width, @height
         )
       )
     end
