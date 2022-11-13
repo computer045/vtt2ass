@@ -16,6 +16,7 @@ class ASSFile
   def initialize(title, width, height, css_file_path = nil)
     @width = width
     @height = height
+    @css_file = nil
     @css_file = CSSFile.new(css_file_path) unless css_file_path.nil?
     @header = <<~HEADER
       [Script Info]
